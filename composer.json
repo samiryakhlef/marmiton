@@ -1,0 +1,15 @@
+{
+    "name": "vendor/marmiton",
+    "autoload": {
+        "psr-4": {
+            "Vendor\\Marmiton\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "samir yakhlef",
+            "email": "samir.yakhlef30@gmail.com"
+        }
+    ],
+    "require": {}
+}
