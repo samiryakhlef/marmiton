@@ -1,0 +1,13 @@
+init composer;
+
+create files for MVC patterns;
+
+create unique files class for CRUD
+
+create connexion for PDO statements
+
+use singleton pattern for connexion with "PDO statements"
+
+
+
+

@@ -2,7 +2,7 @@
     "name": "vendor/marmiton",
     "autoload": {
         "psr-4": {
-            "Vendor\\Marmiton\\": "src/"
+            "App\\": "src/"
         }
     },
     "authors": [
@@ -11,5 +11,7 @@
             "email": "samir.yakhlef30@gmail.com"
         }
     ],
-    "require": {}
+    "require-dev": {
+        "symfony/var-dumper": "^6.0"
+    }
 }
