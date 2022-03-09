@@ -1,12 +1,28 @@
 init composer;
 
-create files for MVC patterns;
+creer 4 dossiers :
+-Database
+-Controller
+-Model
+-View
 
-create unique files class for CRUD
 
-create connexion for PDO statements
+creer une PDO avec un singleton pattern // si OK
 
-use singleton pattern for connexion with "PDO statements"
+creer un model test pour faire une requete SQL test // si OK 
+
+creer un AbstractController
+
+creer un 1er controller pour donner les routes 
+
+creer une vue pour tester la route du controleur et la requete SQL test // si OK
+
+mettre en place les requete marmiton
+-CRUD
+
+mettre en place les vues avec du bootstrap si besoin 
+creer un dossiers assets pour y ajouter du CSS.
+
 
 
 
