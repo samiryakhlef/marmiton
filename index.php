@@ -15,6 +15,10 @@ class Application
         'Accueil' => [
             'Controller' => 'AccueilController',
             'method' => 'index'
+        ],
+        'error404' => [
+            'controller' => 'ErrorController',
+            'method' => 'error404'
         ]
 
     ];
@@ -38,7 +42,7 @@ class Application
         // je récupère la route demandée dans l'url
         // si la page n'est pas spécifiée (ex: on arrive pour la première fois sur le site)
         // on redirige vers la page d'accueil
-        $route_name = $_GET['Accueil'] ?? self::DEFAULT_ROUTE;
+        $route_name = $_GET['page'] ?? self::DEFAULT_ROUTE;
 
         // je vérifie si la route demandée existe
         $route = $this->match($route_name);

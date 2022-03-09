@@ -10,10 +10,18 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
 //connexion base de donnée
+
 use App\Database\Database;
+use App\Model\ModelAccueil;
+
+
+//$plats = new ModelPlats();
+
+$model = new ModelAccueil();
 
 $db = new Database();
 $db->Connect();
+$db->connect();
 ?>
 
 <!DOCTYPE html>
@@ -28,6 +36,11 @@ $db->Connect();
 </head>
 
 <body>
+
+
+    <!------------------------------------------- navbar --------------------------------------------->
+
+
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
             <a class="navbar-brand" href="#"><svg class="MRTN__sc-11duill-7 eiZuJc" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="309" height="48" viewBox="0 0 309 48">
@@ -59,16 +72,27 @@ $db->Connect();
                             Recettes
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#">Entrée</a></li>
-                            <li><a class="dropdown-item" href="#">Plats</a></li>
-                            <li><a class="dropdown-item" href="#">Desserts</a></li>
+                            <li><a class="dropdown-item" href="#"> <strong>Entrée</strong></a>
+                                <?php foreach ($accueil as $accueils) : ?>
+                            <li class="list-group-item"><?= $accueils->getType('name')?></li>
 
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
 
-                        </ul>
-                    
+
+                    </li>
+                    <?php endforeach; ?>
+                    <li><a class="dropdown-item" href="#"><strong>Plats</strong></a>
+
+                    <li class="list-group-item"></li>
+
+                    </li>
+                    <li><a class="dropdown-item" href="#"><strong>Désserts</strong></a></li>
+
+                    <li>
+                    <hr class="dropdown-divider">
+                    </li>
+
+                </ul>
+
                 </ul>
                 <form class="d-flex">
                     <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
@@ -79,6 +103,15 @@ $db->Connect();
     </nav>
 
 
+    <!------------------liste des recettes -------------------->
+
+    <h1 class="titlerecipe">Liste des recettes</h1>
+    <ul class="list-group">
+        <?php foreach ($accueil as $accueils) : ?>
+            <li class="list-group-item"><?= $accueils->getName() ?></li>
+
+        <?php endforeach; ?>
+    </ul>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>

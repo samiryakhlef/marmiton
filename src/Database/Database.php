@@ -5,8 +5,8 @@ namespace App\database;
 use PDOException;
 use PDO;
 
-Class Database
-{   
+class Database
+{
     private $config;
     private $pdo;
 
@@ -36,19 +36,26 @@ Class Database
     /**
      * Connect to the DataBase
      */
+
+    // instance singletonPattern
+    private static $instance = null;
+
+    // Connexion a la base de données
     public function connect()
     {
-        $dbh ='';
-        // Connexion a la base de données 
-        try {
-            $dbh = new PDO('mysql:host=' . $this->config["DB_HOST"] . ';dbname=' . $this->config["DB_NAME"], $this->config["DB_USERNAME"], $this->config["DB_PASSWORD"]);
-            $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            echo 'Échec lors de la connexion : ' . $e->getMessage();
+        //condition singletonPattern
+        if (self::$instance === null) {
+            try {
+                self::$instance = new PDO('mysql:host=' . $this->config["DB_HOST"] . ';dbname=' . $this->config["DB_NAME"], $this->config["DB_USERNAME"], $this->config["DB_PASSWORD"]);
+                self::$instance->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            } catch (PDOException $e) {
+                echo 'Échec lors de la connexion : ' . $e->getMessage();
+            }
         }
-        $this->pdo = $dbh;
+        $this->pdo = self::$instance;
     }
-    public function getPDO(){
-        return $this->pdo;
+    public function getPDO()
+    {
+        return self::$instance;
     }
 }

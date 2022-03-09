@@ -12,14 +12,16 @@ class AccueilController extends AbstractController
         $modelAccueil = new ModelAccueil();
 
         $accueil = $modelAccueil->findAll();
+        $plats = $modelAccueil->findByType ('plats');
         // ma logique métier ici
         // exemple récupérer des données en BDD
         // traiter des formulaire
         // vérifier que l'utilisateur a les droits
         // etc...
         $this->render('Accueil.php', [
-            'accueil' => $accueil
+            'accueil' => $accueil,
+            'plats' => $plats
         ]);
     }
-}
     
+}
