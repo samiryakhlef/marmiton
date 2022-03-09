@@ -23,7 +23,7 @@ class ModelAccueil
 
     const TABLE_NAME = 'entrees';
 
-    
+
     // instancie ma connexion à la base de données
     public function __construct()
     {
@@ -68,7 +68,7 @@ class ModelAccueil
                 ,`type`
                 FROM " . self::TABLE_NAME . "
                 WHERE `type` LIKE :type
-                ORDER BY `type` DESC ;
+                ORDER BY `type` ASC ;
         ";
         $pdoStatement = $this->pdo->prepare($sql);
         $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);

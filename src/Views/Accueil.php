@@ -72,24 +72,30 @@ $db->connect();
                             Recettes
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+
+
                             <li><a class="dropdown-item" href="#"> <strong>Entrée</strong></a>
+
+
                                 <?php foreach ($accueil as $accueils) : ?>
-                            <li class="list-group-item"><?= $accueils->getType('name')?></li>
 
+
+                            <li class="list-group-item"><?= $accueils->getType('plats') ?></li>
 
 
                     </li>
-                    <?php endforeach; ?>
-                    <li><a class="dropdown-item" href="#"><strong>Plats</strong></a>
 
-                    <li class="list-group-item"></li>
+                <?php endforeach; ?>
 
-                    </li>
-                    <li><a class="dropdown-item" href="#"><strong>Désserts</strong></a></li>
 
-                    <li>
+                <li><a class="dropdown-item" href="#"><strong>Plats</strong></a>
+
+                </li>
+                <li><a class="dropdown-item" href="#"><strong>Désserts</strong></a></li>
+
+                <li>
                     <hr class="dropdown-divider">
-                    </li>
+                </li>
 
                 </ul>
 
@@ -108,7 +114,7 @@ $db->connect();
     <h1 class="titlerecipe">Liste des recettes</h1>
     <ul class="list-group">
         <?php foreach ($accueil as $accueils) : ?>
-            <li class="list-group-item"><?= $accueils->getName() ?></li>
+            <li class="list-group-item"><?= $accueils->getType() ?></li>
 
         <?php endforeach; ?>
     </ul>
