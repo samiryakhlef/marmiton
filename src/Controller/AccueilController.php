@@ -11,7 +11,7 @@ class AccueilController extends AbstractController
     {
         $modelAccueil = new ModelAccueil();
 
-        $entrees = $modelAccueil->findAll();
+        $accueil = $modelAccueil->findAll();
         $plats = $modelAccueil->findByType('plats');
         // ma logique métier ici
         // exemple récupérer des données en BDD
@@ -19,7 +19,7 @@ class AccueilController extends AbstractController
         // vérifier que l'utilisateur a les droits
         // etc...
         $this->render('Accueil.php', [
-            'accueil' => $entrees,
+            'accueil' => $accueil,
             'plats' => $plats,
         ]);
     }

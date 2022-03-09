@@ -80,7 +80,7 @@ $db->connect();
                                 <?php foreach ($accueil as $accueils) : ?>
 
 
-                            <li class="list-group-item"><?= $accueils->getType('plats') ?></li>
+                            <li class="list-group-item"><?= $accueils->getType() ?></li>
 
 
                     </li>
@@ -113,8 +113,8 @@ $db->connect();
 
     <h1 class="titlerecipe">Liste des recettes</h1>
     <ul class="list-group">
-        <?php foreach ($accueil as $accueils) : ?>
-            <li class="list-group-item"><?= $accueils->getType() ?></li>
+        <?php foreach ($plats as $plat) : ?>
+            <li class="list-group-item"><?= $plat->getType() ?></li>
 
         <?php endforeach; ?>
     </ul>
