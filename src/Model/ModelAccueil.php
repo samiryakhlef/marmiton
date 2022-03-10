@@ -32,10 +32,10 @@ class ModelAccueil
     }
 
 
-    // je recupère ma base de données
+    // je recupère toutes ma base de données
     public function findAll()
     {
-        $sql = 'SELECT
+        $sql = 'SELECT  
                 `id`
                 ,`name`
                 ,`description`
@@ -45,8 +45,7 @@ class ModelAccueil
                 
                 ,`type`
                 FROM ' . self::TABLE_NAME . '
-                ORDER BY id ASC;
-        ';
+                ORDER BY id ASC LIMIT 4';
 
         $pdoStatement = $this->pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
@@ -55,6 +54,8 @@ class ModelAccueil
 
         return $result;
     }
+
+    // je récupère ma BDD par type 
 
     public function findByType($type)
     {
@@ -76,7 +77,7 @@ class ModelAccueil
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
     }
-
+    // je récupère par ma BBD par ID
     public function findById($id)
     {
         $sql = 'SELECT
@@ -98,6 +99,7 @@ class ModelAccueil
         $result = $pdoStatement->fetchObject(self::class);
         return $result;
     }
+    // je creer une entrées dans ma table 
 
     public function create($name)
     {
@@ -126,6 +128,27 @@ class ModelAccueil
         }
     }
 
+    // j'efface les données de ma table 
+    public function delete($name)
+    {
+        $sql = 'DELETE FROM' . self::TABLE_NAME . '
+            `id`
+            ,`name`
+            ,`description`
+            ,`ingredients`
+            ,`temps`
+            ,`difficulty`
+            ,`type`
+            
+            ORDER BY id ASC';
+
+                $pdoStatement = $this->pdo->prepare($sql);
+                $pdoStatement->bindValue(':name', $name, PDO::PARAM_STR);
+                $result = $pdoStatement->execute();
+
+        return $result;
+    
+    }
 
     /**
      * Get the value of id

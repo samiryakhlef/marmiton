@@ -113,12 +113,29 @@ $db->connect();
 
     <h1 class="titlerecipe">Liste des recettes</h1>
     <ul class="list-group">
-        <?php foreach ($plats as $plat) : ?>
-            <li class="list-group-item"><?= $plat->getType() ?></li>
+        <?php foreach ($accueil as $accueils) : ?>
+            <li class="list-group-item"><?= $accueils->getName() ?></li>
 
         <?php endforeach; ?>
     </ul>
-
+    <nav aria-label="Page navigation example center-center">
+        <ul class="pagination">
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                </a>
+            </li>
+            
+            <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item"><a class="page-link" href="#">2</a></li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li>
+            <li class="page-item">
+                <a class="page-link" href="#" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
