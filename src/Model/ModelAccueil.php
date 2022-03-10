@@ -21,6 +21,8 @@ class ModelAccueil
 
     protected $type;
 
+    protected $nb_articles;
+
     const TABLE_NAME = 'entrees';
 
 
@@ -42,20 +44,25 @@ class ModelAccueil
                 ,`ingredients`
                 ,`temps`
                 ,`difficulty`
-                
                 ,`type`
                 FROM ' . self::TABLE_NAME . '
-                ORDER BY id ASC LIMIT 4';
+                ORDER BY id ASC';
 
         $pdoStatement = $this->pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
-
-
-
         return $result;
     }
 
-    // je récupère ma BDD par type 
+    
+
+  
+
+
+
+                
+
+
+    
 
     public function findByType($type)
     {
@@ -69,7 +76,7 @@ class ModelAccueil
                 ,`type`
                 FROM " . self::TABLE_NAME . "
                 WHERE `type` LIKE :type
-                ORDER BY `type` ASC ;
+                ORDER BY `type` DESC LIMIT 0;
         ";
         $pdoStatement = $this->pdo->prepare($sql);
         $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
@@ -266,6 +273,26 @@ class ModelAccueil
     public function setType($type)
     {
         $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of nb_articles
+     */ 
+    public function getNb_articles()
+    {
+        return $this->nb_articles;
+    }
+
+    /**
+     * Set the value of nb_articles
+     *
+     * @return  self
+     */ 
+    public function setNb_articles($nb_articles)
+    {
+        $this->nb_articles = $nb_articles;
 
         return $this;
     }

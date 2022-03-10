@@ -4,47 +4,62 @@ namespace App\Controller;
 
 use App\Model\ModelAccueil;
 use App\Controller\AbstractController;
+use PDO;
 
 class AccueilController extends AbstractController
 {
     public function index()
     {
+        // j'appelle ma class ModelAccueil
         $modelAccueil = new ModelAccueil();
 
+        // j'appelle ma fonction findAll
         $accueil = $modelAccueil->findAll();
+
+        //j'appelle ma fonction findByType
         $plats = $modelAccueil->findByType('plats');
-        // ma logique métier ici
-        // exemple récupérer des données en BDD
-        // traiter des formulaire
-        // vérifier que l'utilisateur a les droits
 
-        // je définie une valeur à la page
-        if (!isset($_GET['page'])) {
+        //PAGINATION
 
-            $page_number = 1;
+        // On détermine sur quelle page on se trouve
+        if (isset($_GET['page']) && !empty($_GET['page'])) {
+            $currentPage = (int) strip_tags($_GET['page']);
         } else {
-
-            $page_number = $_GET['page'];
+            $currentPage = 1;
         }
 
-        //variable pour stocker le nombre de lignes par page
-        $limit = 3;
-        $total_rows = 7;
-        
-        //je recupere le numero de la page 
-        $initial_page = ($page_number-1)*$limit;
+        // requête nombre d'articles BDD,j'utilise le "COUNT" 
+        $sql = 'SELECT COUNT(*) AS nb_articles FROM `entrees`';
 
-        //Je recupere le numero de la page
-        $total_pages = ceil ($total_rows / $limit); 
+
+        // je prepare ma requete
+        $pdoStatement = $this->pdo->prepare($sql);
+
+        //j'execute ma requête
+        $pdoStatement->execute();
+
+        //je fetchAll mes recettes
+        $result = $pdoStatement->fetchAll();
+
+
+        // je retourne le nombres de recettes dans ma table 'entrees'
+        $nb_articles = $result['nb_articles'];
+
+        // On détermine le nombre d'articles par page
+        $parPage = 3;
+
+        // On calcule le nombre de pages total
+        $pages = ceil($nb_articles / $parPage);
+
+
 
 
 
         $this->render('Accueil.php', [
             'accueil' => $accueil,
             'plats' => $plats,
-            'total_pages' => $total_pages
+            'page' => $currentPage,
+
         ]);
     }
-
-    
 }
