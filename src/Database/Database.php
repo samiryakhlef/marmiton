@@ -1,36 +1,42 @@
 <?php
 
-namespace App\database;
+namespace App\Database;
 
+use Exception;
 use PDOException;
 use PDO;
 
 class Database
 {
-    private $config;
-    private $pdo;
+    private array|false $config;
+    public PDO $pdo;
+
 
     /**
      * THE CONSTRUCTOR
+     *
+     * @throws Exception
      */
     public function __construct()
     {
-        $this->getconfig();
+        $this->config();
         $this->connect();
     }
 
     /**
      * Retrieve the config from the config.ini file
+     *
+     * @throws Exception
      */
-    private function getconfig()
+    private function config(): void
     {
-        // On récupere les identifiants de la Base de données
-        $config = parse_ini_file('config.ini', true);
+        // On récupère les identifiants de la Base de données
+        $con = parse_ini_file('config.ini', true);
         // Erreur pour vor si le fichier n'existe pas 
-        if (!$config) {
-            throw new \Exception("Le fichier config.ini n'existe pas");
+        if (!$con) {
+            $this->thrownew();
         }
-        $this->config = $config;
+        $this->config = $con;
     }
 
     /**
@@ -41,7 +47,7 @@ class Database
     private static $instance = null;
 
     // Connexion a la base de données
-    public function connect()
+    public function connect(): void
     {
         //condition singletonPattern
         if (self::$instance === null) {
@@ -58,4 +64,13 @@ class Database
     {
         return self::$instance;
     }
+
+    /**
+     * @throws Exception
+     */
+    private function thrownew(): void
+    {
+        throw new ('Fichier de configuration introuvable');
+    }
+
 }

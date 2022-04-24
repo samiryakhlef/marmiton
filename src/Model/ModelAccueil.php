@@ -23,10 +23,15 @@ class ModelAccueil
 
     protected $nb_articles;
 
-    const TABLE_NAME = 'entrees';
+    public const TABLE_NAME = 'entrees';
 
 
     // instancie ma connexion à la base de données
+    /**
+     * @var null
+     */
+    private $pdo;
+
     public function __construct()
     {
         $database = new Database();
@@ -34,8 +39,15 @@ class ModelAccueil
     }
 
 
-    // je recupère toutes ma base de données
+    // je récupère toute ma base de données
     public function findAll()
+    {
+        $sql = 'SELECT * FROM ' . self::TABLE_NAME;
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    // je récupère par ma BBD par ID
+    public function findById($id)
     {
         $sql = 'SELECT  
                 `id`
@@ -46,46 +58,45 @@ class ModelAccueil
                 ,`difficulty`
                 ,`type`
                 FROM ' . self::TABLE_NAME . '
-                ORDER BY id ASC';
+                WHERE id = :id';
 
-        $pdoStatement = $this->pdo->query($sql);
-        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
-        return $result;
+        $pdoStatement = $this->pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdoStatement->execute();
+        return $pdoStatement->fetchObject(self::class);
     }
 
-    
-
-  
-
-
-
-                
-
-
-    
-
-    public function findByType($type)
+    // je créer ma BDD par name
+    public function create($id, $name, $description, $ingredient, $difficulty, $type)
     {
-        $sql = "SELECT
-                `id`
-                ,`name`
-                ,`description`
-                ,`ingredients`
-                ,`temps`
-                ,`difficulty`
-                ,`type`
-                FROM " . self::TABLE_NAME . "
-                WHERE `type` LIKE :type
-                ORDER BY `type` DESC LIMIT 0;
-        ";
+        $sql = 'INSERT INTO ' . self::TABLE_NAME . ' (id, name, description, ingredients, temps, difficulty, type)
+                VALUES (:id, :name, :description, :ingredients, :temps, :difficulty, :type)';
+
         $pdoStatement = $this->pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        $pdoStatement->bindValue(':name', $name, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':description', $description, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':ingredients', $ingredient, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':temps', $difficulty, PDO::PARAM_STR);
+        $pdoStatement->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
         $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
         $pdoStatement->execute();
-        $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
-        return $result;
+        return $pdoStatement;
+
     }
-    // je récupère par ma BBD par ID
-    public function findById($id)
+
+    // j'efface les données de ma table 
+    public function delete($id)
+    {
+        $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id';
+
+        $pdoStatement = $this->pdo->prepare($sql);
+        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
+        return $pdoStatement->execute();
+    }
+
+    // je créer ma bdd par type
+    public function findByType($type)
     {
         $sql = 'SELECT
                 `id`
@@ -94,68 +105,18 @@ class ModelAccueil
                 ,`ingredients`
                 ,`temps`
                 ,`difficulty`
-                
                 ,`type`
                 FROM ' . self::TABLE_NAME . '
-                ORDER BY id ASC;
+                WHERE type = :type
+                ORDER BY id;
         ';
 
         $pdoStatement = $this->pdo->prepare($sql);
-        $pdoStatement->bindValue(':id', $id, PDO::PARAM_INT);
-        $result = $pdoStatement->execute();
-        $result = $pdoStatement->fetchObject(self::class);
-        return $result;
-    }
-    // je creer une entrées dans ma table 
-
-    public function create($name)
-    {
-        $sql = 'INSERT INTO ' . self::TABLE_NAME . '
-        `id`
-        ,`name`
-        ,`description`
-        ,`ingredients`
-        ,`temps`
-        ,`difficulty`
-        
-        ,`type`
-        FROM ' . self::TABLE_NAME . '
-        ORDER BY id ASC;
-                VALUES
-                (:name, :description, :ingredients, :temps, :difficulty, :type)
-        ';
-
-        $pdoStatement = $this->pdo->prepare($sql);
-        $pdoStatement->bindValue(':name', $name, PDO::PARAM_STR);
-
-        $result = $pdoStatement->execute();
-
-        if (!$result) {
-            return false;
-        }
+        $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
+        $pdoStatement->execute();
+        return $pdoStatement->fetchObject(self::class);
     }
 
-    // j'efface les données de ma table 
-    public function delete($name)
-    {
-        $sql = 'DELETE FROM' . self::TABLE_NAME . '
-            `id`
-            ,`name`
-            ,`description`
-            ,`ingredients`
-            ,`temps`
-            ,`difficulty`
-            ,`type`
-            
-            ORDER BY id ASC';
-
-                $pdoStatement = $this->pdo->prepare($sql);
-                $pdoStatement->bindValue(':name', $name, PDO::PARAM_STR);
-                $result = $pdoStatement->execute();
-
-        return $result;
-    
-    }
 
     /**
      * Get the value of id
@@ -188,9 +149,10 @@ class ModelAccueil
     /**
      * Set the value of name
      *
+     * @param $name
      * @return  self
      */
-    public function setName($name)
+    public function setName($name): static
     {
         $this->name = $name;
 
@@ -279,7 +241,7 @@ class ModelAccueil
 
     /**
      * Get the value of nb_articles
-     */ 
+     */
     public function getNb_articles()
     {
         return $this->nb_articles;
@@ -289,7 +251,7 @@ class ModelAccueil
      * Set the value of nb_articles
      *
      * @return  self
-     */ 
+     */
     public function setNb_articles($nb_articles)
     {
         $this->nb_articles = $nb_articles;

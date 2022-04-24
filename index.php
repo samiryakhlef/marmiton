@@ -1,11 +1,10 @@
 <?php
 
+use App\database\Database;
 
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
-
-
 
 require 'vendor/autoload.php';
 
@@ -13,21 +12,31 @@ class Application
 {
     const AUTHORIZED_PAGES = [
         'Accueil' => [
-            'Controller' => 'AccueilController',
+            'controller' => 'AccueilController',
             'method' => 'index'
+        ],
+        'AddMovies' => [
+            'controller' => 'AccueilController',
+            'method' => 'create'
+        ],
+        'RemoveMovies' => [
+            'controller' => 'AccueilController',
+            'method' => 'remove'
+        ],
+        'SelectUpdateMovies' => [
+            'controller' => 'AccueilController',
+            'method' => 'selectUpdate'
         ],
         'error404' => [
             'controller' => 'ErrorController',
             'method' => 'error404'
-        ]
-
+        ],
     ];
 
     const DEFAULT_ROUTE = 'Accueil';
 
-    private function match($route_name)
-    {
-        // je vérifie sir la clef existe dans la liste des pages autorisées
+    private function match($route_name){
+        // je vérifie si la clef existe dans la liste des pages autorisées
         if (isset(self::AUTHORIZED_PAGES[$route_name])) {
             $route = self::AUTHORIZED_PAGES[$route_name];
         } else {
@@ -47,14 +56,15 @@ class Application
         // je vérifie si la route demandée existe
         $route = $this->match($route_name);
 
-        // dump($route);
+
 
         // j'instancie le controller correspondant à la route demandée
-        $controller_name = 'App\Controller\\' . $route['Controller'];
+        $controller_name = 'App\Controller\\' . $route['controller'];
         $controller = new $controller_name();
         // j'appelle la méthode correspondante à la route demandée
         $method_name = $route['method'];
         $controller->$method_name();
+
     }
 }
 
