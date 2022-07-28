@@ -2,8 +2,6 @@
 
 namespace App\Controller;
 
-use JsonException;
-
 abstract class AbstractController implements InterfaceController
 {
     public function render($view_path, $data = [])
@@ -12,9 +10,6 @@ abstract class AbstractController implements InterfaceController
         include_once __DIR__.'/../Views/'.$view_path;
     }
 
-    /**
-     * @throws JsonException
-     */
     public function sendJson($data)
     {
         header('Content-Type: application/json');

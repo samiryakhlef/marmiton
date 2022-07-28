@@ -11,32 +11,38 @@ require 'vendor/autoload.php';
 class Application
 {
     const AUTHORIZED_PAGES = [
-        'Accueil' => [
+        'projets' => [
             'controller' => 'AccueilController',
             'method' => 'index'
         ],
-        'AddMovies' => [
-            'controller' => 'AccueilController',
-            'method' => 'create'
+        'ingredients' => [
+            'controller' => 'IngredientsController',
+            'method' => 'index'
         ],
-        'RemoveMovies' => [
-            'controller' => 'AccueilController',
-            'method' => 'remove'
+        'details' => [
+            'controller' => 'DetailsController',
+            'method' => 'index'
         ],
-        'SelectUpdateMovies' => [
-            'controller' => 'AccueilController',
-            'method' => 'selectUpdate'
+        'delete' => [
+            'controller' => 'AdminController',
+            'method' => 'delete'
         ],
-        'error404' => [
-            'controller' => 'ErrorController',
-            'method' => 'error404'
+        'insert' => [
+            'controller' => 'AdminController',
+            'method' => 'insert'
         ],
+        'insert_text' => [
+            'controller' => 'ArticleController',
+            'method' => 'insert_text'
+        ],
+        
     ];
 
-    const DEFAULT_ROUTE = 'Accueil';
+    const DEFAULT_ROUTE = 'projets';
 
-    private function match($route_name){
-        // je vérifie si la clef existe dans la liste des pages autorisées
+    private function match($route_name)
+    {
+        // je vérifie sir la clef existe dans la liste des pages autorisées
         if (isset(self::AUTHORIZED_PAGES[$route_name])) {
             $route = self::AUTHORIZED_PAGES[$route_name];
         } else {
@@ -56,7 +62,7 @@ class Application
         // je vérifie si la route demandée existe
         $route = $this->match($route_name);
 
-
+        // dump($route);
 
         // j'instancie le controller correspondant à la route demandée
         $controller_name = 'App\Controller\\' . $route['controller'];
@@ -64,7 +70,6 @@ class Application
         // j'appelle la méthode correspondante à la route demandée
         $method_name = $route['method'];
         $controller->$method_name();
-
     }
 }
 

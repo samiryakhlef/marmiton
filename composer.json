@@ -15,6 +15,7 @@
         "symfony/var-dumper": "^6.0"
     },
     "require": {
-        "ext-pdo": "*"
+        "ext-pdo": "*",
+        "twbs/bootstrap-icons": "^1.9"
     }
 }

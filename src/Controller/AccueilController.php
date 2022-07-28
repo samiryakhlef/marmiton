@@ -2,55 +2,31 @@
 
 namespace App\Controller;
 
+use App\Controller\AbstractController;
 use App\Model\ModelAccueil;
 
 class AccueilController extends AbstractController
 {
     public function index()
     {
-        // j'appelle ma class ModelAccueil
-        $modelAccueil = new ModelAccueil();
-
-        if(isset($_GET['page'])) {
-            $page = $_GET['page'];
+        // On détermine sur quelle page on se trouve
+        if (isset($_GET['p']) && !empty($_GET['p'])) {
+            $currentPage = (int) strip_tags($_GET['p']);
         } else {
             $currentPage = 1;
         }
-
-        if(isset($_GET['search'])) {
-            $limit = $_GET['search'];
-        } else {
-            $research = "";
-        }
-
-        $order = $_GET['order'] ?? ($_GET = 1);
-
-        if(isset($_GET['select'])) {
-            $order = $_GET['select'];
-        } else {
-            $select = "";
-        }
-
-        if(isset($_GET['research'])) {
-            $order = $_GET['research'];
-        } else {
-            $research = "";
-        }
-
-        $accueil = $modelAccueil->findAll([
-            'order' => $order,
-            'select' => $select,
-            'research' => $research,
-            'currentPage' => $currentPage,
-        ]);
-
-
-        // je récupère ma vue
+        //j'instancie la base données
+        $ModelAccueil = new ModelAccueil();
+        //je récupère la liste des entrées
+        $accueils = $ModelAccueil->findAll($currentPage);
+        //je récupère la fonction create pour update en base de données
+        //$create = $ModelAccueil->create($id, $name, $description, $ingredient, $difficulty, $type);
+        
         $this->render('Accueil.php', [
-            'accueil' => $accueil,
+            'accueils' => $accueils,
+            'pages' => $accueils,
             'currentPage' => $currentPage,
+            //'recettes'=> $create,
         ]);
     }
 }
-
-
