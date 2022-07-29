@@ -115,7 +115,7 @@ use App\Database\Recette;
                 </select>
                 <select type="text" name="type" class="p-2 m-2 rounded-pill" placeholder="dificulté">
                     <option>Type de Recette</option>
-                    <option value="entrees">Entrées</option>
+                    <option value="entrer">Entrées</option>
                     <option value="plats">Plats</option>
                     <option value="desserts">Désserts</option>
                 </select>
