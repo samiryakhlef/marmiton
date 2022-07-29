@@ -48,7 +48,7 @@ class ModelAccueil
     // je créer une fonction create pour update en base de données
     public function create($id, $name, $description, $ingredient, $difficulty, $type)
     {
-        $sql = 'INSERT INTO ' . self::TABLE_NAME . ' (id=?, name, description, ingredient, difficulty, type) VALUES (:id, :name, :description, :ingredient, :difficulty, :type)';
+        $sql = 'INSERT INTO ' . self::TABLE_NAME . ' (id, name, description, ingredient, difficulty, type) VALUES (:id, :name, :description, :ingredient, :difficulty, :type)';
         $query = $this->pdo->prepare($sql);
         $query->execute([
             `id` => $id, 

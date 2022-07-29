@@ -14,15 +14,5 @@ S
 composer.json,3/9/3957b91a0d8450cea0115cfd5af69eac90d75897
 U
 %src/Controller/AbstractController.php,4/9/49e3e069bf182162a1785a626b627fb319b375a5
-I
-src/Database/Database.php,d/5/d5a4bdc26f2aab592e573a7408197704334f8e90
 9
 	index.php,b/b/bb6499b8e938f92a3695fff1afe57edea4b9efb7
-T
-$src/Controller/AccueilController.php,4/f/4fca059e6d922de719abe2b69812eb6743d3f1a3
-@
-src/Database.php,2/d/2d392914df1d14900ff18bf78f1b49bb0c3c76d9
-J
-src/Model/ModelAccueil.php,a/8/a81d876b931217813a005358b02d9beb11a083ac
-E
-src/Views/Accueil.php,2/f/2f46f3bd8d2447a6c74863522376586ecc6e2a69

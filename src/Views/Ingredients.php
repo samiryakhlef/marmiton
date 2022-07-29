@@ -5,16 +5,22 @@ error_reporting(E_ALL);
 
 require 'vendor/autoload.php';
 
-use App\Controller\IngredientsController;
-use App\Database;
+use App\Database\Recette;
 
-//connexion base de donnée
-$db = new Database();
-$db->Connect();
+    $name = $_POST['name'];
+    $description = $_POST['description'];
+    $ingredients = $_POST['ingredients'];
+    $difficulty = $_POST['difficulty'];
+    $type = $_POST['type'];
+    $temps = $_POST['temps'];
 
-//j'instancie un variable qui contiendra la route demandée
-$create = new IngredientsController();
-$create->index();
+    if (
+        !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps)
+    ){
+        $recette = new Recette();
+        $recette->addRecette($name, $description, $ingredients, $difficulty, $type, $temps);
+    }
+
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -92,19 +98,22 @@ $create->index();
     </legend>
     <div class="container col-xl-6 mx-auto p-4 p-sm-2 rounded Regular shadow" style="--bs-bg-opacity: .7;background-color:rgb(237, 107, 94);">
 
-        <form action="POST" class="form-control">
+
+        <!-------------------------vérification des champs du formulaire------------------------>
+
+        <form method="post" class="form-control">
             <div class="d-flex flex-column mb-3 p-4 p-sm-2 rounded" style="--bs-bg-opacity: .7;">
-                <input type="text" class="p-2 m-2 rounded-pill" placeholder="nom de la recette">
-                <input type="text" class="p-2 m-2 rounded-pill" placeholder="description de la recette">
-                <input type="text" class="p-2 m-2 rounded-pill" placeholder="ingredients">
-                <input type="time" class="p-2 m-2 rounded-pill" placeholder="Temps de préparation">
-                <select type="text" class="p-2 m-2 rounded-pill" placeholder="dificulté">
+                <input type="text" name="name" class="p-2 m-2 rounded-pill" placeholder="nom de la recette">
+                <input type="text" name="description" class="p-2 m-2 rounded-pill" placeholder="description de la recette">
+                <input type="text" name="ingredients" class="p-2 m-2 rounded-pill" placeholder="ingredients">
+                <input type="time" name="temps" class="p-2 m-2 rounded-pill" placeholder="Temps de préparation">
+                <select type="text" name="difficulty" class="p-2 m-2 rounded-pill" placeholder="dificulté">
                     <option>Difficulté de la recette</option>
                     <option value="facile">Facile</option>
                     <option value="moyen">Moyen</option>
                     <option value="dur">Dur</option>
                 </select>
-                <select type="text" class="p-2 m-2 rounded-pill" placeholder="dificulté">
+                <select type="text" name="type" class="p-2 m-2 rounded-pill" placeholder="dificulté">
                     <option>Type de Recette</option>
                     <option value="entrees">Entrées</option>
                     <option value="plats">Plats</option>
@@ -112,10 +121,10 @@ $create->index();
                 </select>
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                    <input class="form-control form-control-sm" id="formFileSm" type="file">
+                    <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
                 </div>
                 <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                    <button type="button" class="btn btn-outline-secondary rounded-pill ">Ajouter votre recette</button>
+                    <button type="submit" class="btn btn-outline-secondary rounded-pill " value="envoyer">Ajouter votre recette</button>
                 </div>
             </div>
         </form>

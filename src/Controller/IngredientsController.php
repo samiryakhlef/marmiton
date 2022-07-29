@@ -2,8 +2,8 @@
 
 namespace App\Controller;
 
+use App\Database\Recette;
 use App\Controller\AbstractController;
-use App\Model\ModelAccueil;
 
 class IngredientsController extends AbstractController
 {
@@ -15,16 +15,7 @@ class IngredientsController extends AbstractController
         } else {
             $currentPage = 1;
         }
-        //j'instancie la base données
-        //$ModelAccueil = new ModelAccueil();
-        //je récupère la liste des entrées
-        //$accueils = $ModelAccueil->findAll($currentPage);
-        //je récupère la fonction create pour update en base de données
-        //$create = $ModelAccueil->create($id, $name, $description, $ingredient, $difficulty, $type);
-        
-        $this->render('Ingredients.php', [
-            //'recettes'=> $create,
-            //'pages' => $accueils,
-        ]);
+
+        $this->render('Ingredients.php');
     }
 }
