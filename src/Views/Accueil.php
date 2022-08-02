@@ -1,19 +1,19 @@
 <?php
+
 namespace App\Views;
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);
 
 require 'vendor/autoload.php';
 
-use App\Controller\AccueilController;
 use App\Database;
 
 //connexion base de donnée
 $db = new Database();
 $db->Connect();
 //j'instancie un variable qui contiendra la route demandée
-$acceuil = new AccueilController();
 ?>
 
 <!DOCTYPE html>
@@ -75,8 +75,15 @@ $acceuil = new AccueilController();
                         </ul>
                 </ul>
                 <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">recherche</button>
+                    <button class="btn btn-outline-success" type="submit" id="select">recherche</button>
+                    <select class="form-select" id="floatingSelect" name="select" aria-label="Floating label select example">
+                        <option value="1" <?php if ($order == 1) {
+                                                echo 'selected';
+                                            } ?>>Décroissant</option>
+                        <option value="2" <?php if ($order == 2) {
+                                                echo 'selected';
+                                            } ?>>Croissant</option>
+                    </select>
                 </form>
             </div>
         </div>
@@ -90,26 +97,24 @@ $acceuil = new AccueilController();
             <div class="card m-4 rounded shadow-lg" style="width: 18rem;">
                 <a href="?page=details"><img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;"></a>
                 <div class="card-body">
-                    <h5 class="card-title text-center text-capitalize"><?php echo $accueil['name'] ?></h5>
-                    <h6 class="card-title text-center text-uppercase"><?php echo $accueil['type'] ?></h6>
+                    <h5 class="card-title text-center text-capitalize"><?= $accueil->getName() ?></h5>
+                    <h6 class="card-title text-center text-uppercase"><?= $accueil->getType() ?></h6>
                     <ul class="d-flex justify-content-evenly" style="list-style:none;">
                         <!----------------------fenetre pop ingédients--------------->
                         <!-- Button trigger modal -->
                         <button type="button" class="btn btn-outline" style=" color:rgb(254, 111, 95);" data-bs-toggle="modal" data-bs-target="#exampleModal">
                             Ingrédients
                         </button>
-
                         <!-- Modal -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h5 class="modal-title" id="exampleModalLabel">Ingredients de la recette</h5>
+
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-                                    <div class="modal-body">
-                                        <?php echo $accueil['ingredients'] ?>
-                                    </div>
+
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                     </div>
@@ -118,26 +123,32 @@ $acceuil = new AccueilController();
                         </div>
                     </ul>
 
-                    <p class="text-center"> <?php echo $accueil['temps'] ?></p>
-                    <p class="text-center"> <?php echo $accueil['description'] ?></p>
+                    <p class="text-center"> <?= $accueil->getTemps() ?></p>
+                    <p class="text-center"> <?= $accueil->getDescription() ?></p>
+                    <p class="text-center"> <?= $accueil->getCreated_At() ?></p>
                 </div>
             </div>
         <?php endforeach; ?>
     </div>
     <!------------------Pagination -------------------->
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item"><a class="page-link" href="#">Précédent</a></li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Suivant</a></li>
-                </ul>
-            </div>
-        </div>
-    </div>
+    <nav class="d-flex justify-content-center">
+        <ul class="pagination">
+            <!-- Lien vers la page précédente (désactivé si on se trouve sur la 1ère page) -->
+            <li class="page-item <?= ($currentPage == 1) ? "disabled" : "" ?>">
+                <a href="?p=<?= $currentPage - 1 ?>&search=<?= $research ?>&order=<?= $order ?>" class="page-link">Précédente</a>
+            </li>
+            <?php for ($page = 1; $page <= $pages; $page++) : ?>
+                <!-- Lien vers chacune des pages (activé si on se trouve sur la page correspondante) -->
+                <li class="page-item <?= ($currentPage == $page) ? "active" : "" ?>">
+                    <a href="?p=<?= $page ?>&search=<?= $research ?>&order=<?= $order ?>" class="page-link"><?= $page ?></a>
+                </li>
+            <?php endfor ?>
+            <!-- Lien vers la page suivante (désactivé si on se trouve sur la dernière page) -->
+            <li class="page-item <?= ($currentPage == $pages) ? "disabled" : "" ?>">
+                <a href="?p=<?= $currentPage + 1 ?>&search=<?= $research ?>&order=<?= $order ?>" class="page-link">Suivante</a>
+            </li>
+        </ul>
+    </nav>
 </body>
 
 </html>

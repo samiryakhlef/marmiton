@@ -16,3 +16,9 @@ U
 %src/Controller/AbstractController.php,4/9/49e3e069bf182162a1785a626b627fb319b375a5
 9
 	index.php,b/b/bb6499b8e938f92a3695fff1afe57edea4b9efb7
+T
+$src/Controller/AccueilController.php,4/f/4fca059e6d922de719abe2b69812eb6743d3f1a3
+E
+src/Views/Accueil.php,2/f/2f46f3bd8d2447a6c74863522376586ecc6e2a69
+J
+src/Model/ModelAccueil.php,a/8/a81d876b931217813a005358b02d9beb11a083ac
