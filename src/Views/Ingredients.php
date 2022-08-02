@@ -6,7 +6,7 @@ error_reporting(E_ALL);
 require 'vendor/autoload.php';
 
 use App\Database\Recette;
-
+if (isset($_POST['submit'])) {
     $name = $_POST['name'];
     $description = $_POST['description'];
     $ingredients = $_POST['ingredients'];
@@ -20,7 +20,7 @@ use App\Database\Recette;
         $recette = new Recette();
         $recette->addRecette($name, $description, $ingredients, $difficulty, $type, $temps);
     }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -2,31 +2,56 @@
 
 namespace App\Controller;
 
-use App\Controller\AbstractController;
+use PDO;
 use App\Model\ModelAccueil;
 
 class AccueilController extends AbstractController
 {
+    const TABLE_NAME = 'entrees';
+
     public function index()
     {
-        // On détermine sur quelle page on se trouve
-        if (isset($_GET['p']) && !empty($_GET['p'])) {
-            $currentPage = (int) strip_tags($_GET['p']);
+        $ModelAccueil = new ModelAccueil();
+
+        if (isset($_GET['p'])) {
+            $currentPage = $_GET['p'];
         } else {
             $currentPage = 1;
         }
-        //j'instancie la base données
-        $ModelAccueil = new ModelAccueil();
-        //je récupère la liste des entrées
-        $accueils = $ModelAccueil->findAll($currentPage);
-        //je récupère la fonction create pour update en base de données
-        //$create = $ModelAccueil->create($id, $name, $description, $ingredient, $difficulty, $type);
-        
+
+        if (isset($_GET['search'])) {
+            $research = $_GET['search'];
+        } else {
+            $research = '';
+        }
+
+        if (isset($_GET['order'])) {
+            $order = $_GET['order'];
+        } else {
+            $order = 1;
+        }
+
+        if (isset($_GET['select'])) {
+            $order = $_GET['select'];
+        }
+
+        if (isset($_GET['research'])) {
+            $research = strtolower($_GET['research']);
+        } else {
+            $research = '';
+        }
+
+        $accueils = $ModelAccueil->findByPage($currentPage, $order, $research);
+        $pages = $ModelAccueil->countPage($research);
+
         $this->render('Accueil.php', [
             'accueils' => $accueils,
-            'pages' => $accueils,
             'currentPage' => $currentPage,
-            //'recettes'=> $create,
+            'pages' => $pages,
+            'research' => $research,
+            'order' => $order
         ]);
     }
-}
+
+    }
+
