@@ -19,11 +19,15 @@ class Application
             'controller' => 'IngredientsController',
             'method' => 'index'
         ],
-        'details' => [
-            'controller' => 'DetailsController',
+        'add_ingredients' => [
+            'controller' => 'IngredientsController',
+            'method' => 'add'
+        ],
+        'admin' => [
+            'controller' => 'AdminController',
             'method' => 'index'
         ],
-        'delete' => [
+        'delete_recette' => [
             'controller' => 'AdminController',
             'method' => 'delete'
         ],

@@ -59,6 +59,10 @@ $db->Connect();
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="?page=ingredients">Ajouter une recette</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="?page=admin">
+                            Administration</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             Recettes
@@ -95,7 +99,7 @@ $db->Connect();
     <div class="container d-flex flex-wrap justify-content-center">
         <?php foreach ($accueils as $accueil) : ?>
             <div class="card m-4 rounded shadow-lg" style="width: 18rem;">
-                <a href="?page=details"><img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;"></a>
+                <a href="?page=ingredients"><img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;"></a>
                 <div class="card-body">
                     <h5 class="card-title text-center text-capitalize"><?= $accueil->getName() ?></h5>
                     <h6 class="card-title text-center text-uppercase"><?= $accueil->getType() ?></h6>
