@@ -47,28 +47,14 @@ class ModelAccueil
         return $result;
     }
 
-
-    // je créer une fonction create pour update en base de données
-    public function create($id, $name, $description, $ingredient, $difficulty, $type)
-    {
-        $sql = 'INSERT INTO ' . self::TABLE_NAME . ' (id, name, description, ingredient, difficulty, type) VALUES (:id, :name, :description, :ingredient, :difficulty, :type)';
-        $query = $this->pdo->prepare($sql);
-        $query->execute([
-            `id` => $id,
-            `name` => $name,
-            `description` => $description,
-            `ingredient` => $ingredient,
-            `difficulty` => $difficulty,
-            `type` => $type
-        ]);
-    }
-
-    // j'efface les données de ma table 
+    // je créer une fonction delete qui prend en paramètre l'id de la recette à supprimer
     public function delete($id)
     {
         $sql = 'DELETE FROM ' . self::TABLE_NAME . ' WHERE id = :id';
         $query = $this->pdo->prepare($sql);
-        $query->execute([`id` => $id]);
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
+        return $query;
     }
 
     // je créer ma bdd par type
