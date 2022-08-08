@@ -82,10 +82,10 @@ $db->Connect();
                     <button class="btn btn-outline-success" type="submit" id="select">recherche</button>
                     <select class="form-select" id="floatingSelect" name="select" aria-label="Floating label select example">
                         <option value="1" <?php if ($order == 1) {
-                                                echo 'selected';
+                                                echo 'research';
                                             } ?>>Décroissant</option>
                         <option value="2" <?php if ($order == 2) {
-                                                echo 'selected';
+                                                echo 'research';
                                             } ?>>Croissant</option>
                     </select>
                 </form>

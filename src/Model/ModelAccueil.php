@@ -95,8 +95,8 @@ class ModelAccueil
 
         if ($research != null) {
             $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' 
-            WHERE titre LIKE "%' . $research . '%" OR genre LIKE "%' . $research . '%" OR acteurs LIKE "%' . $research . '%"
-            ORDER BY `date` ' . $order;
+            WHERE type LIKE "%' . $research . '%" OR name LIKE "%' . $research . '%" OR ingredients LIKE "%' . $research . '%"
+            ORDER BY `id` ' . $order;
         } else {
             $sql = 'SELECT
                 `id`
@@ -108,7 +108,7 @@ class ModelAccueil
                 ,`type`
                 ,`created_at`
                 FROM ' . self::TABLE_NAME . '
-                ORDER BY `created_at` ' . $order . '
+                ORDER BY `id` ' . $order . '
                 LIMIT ' . $pageDebut . ',' . $parPage;
         }
         $pdoStatement = $this->pdo->query($sql);

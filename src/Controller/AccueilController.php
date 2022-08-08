@@ -49,7 +49,8 @@ class AccueilController extends AbstractController
             'currentPage' => $currentPage,
             'pages' => $pages,
             'research' => $research,
-            'order' => $order
+            'order' => $order,
+            'research' => $research,
         ]);
     }
 
