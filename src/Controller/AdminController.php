@@ -31,9 +31,13 @@ class AdminController extends AbstractController
         if (isset($_GET['select'])) {
             $order = $_GET['select'];
         }
+        if(isset($_GET['type'])) {
+            $type = $_GET['type'];
+        } 
+
 
         $ModelAccueil = new ModelAccueil();
-        $accueils = $ModelAccueil->findByPage($currentPage, $order, $research);
+        $accueils = $ModelAccueil->findByPage($currentPage, $order, $research, $type);
         $pages = $ModelAccueil->countPage($research);
 
         $this->render('Admin.php', [

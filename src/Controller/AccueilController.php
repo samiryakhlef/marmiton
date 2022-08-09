@@ -40,8 +40,13 @@ class AccueilController extends AbstractController
         } else {
             $research = '';
         }
+        if(isset($_GET['type'])) {
+            $type = $_GET['type'];
+        } else{
+            $type = '';
+        }
 
-        $accueils = $ModelAccueil->findByPage($currentPage, $order, $research);
+        $accueils = $ModelAccueil->findByPage($currentPage, $order, $research, $type);
         $pages = $ModelAccueil->countPage($research);
 
         $this->render('Accueil.php', [
@@ -49,7 +54,8 @@ class AccueilController extends AbstractController
             'currentPage' => $currentPage,
             'pages' => $pages,
             'research' => $research,
-            'order' => $order
+            'order' => $order,
+            'research' => $research,
         ]);
     }
 
