@@ -43,8 +43,15 @@ class ModelAccueil
         $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = :id';
         $query = $this->pdo->prepare($sql);
         $result = $query->fetchAll(PDO::FETCH_CLASS, self::class);
-        dd($result);
         return $result;
+    }
+    
+    public function editRecette($id)
+    {
+        $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = ?';
+        $query = $this->pdo->prepare($sql);
+        $query->execute([$id]);
+        return $query->fetchAll(PDO::FETCH_ASSOC);
     }
 
     // je créer une fonction delete qui prend en paramètre l'id de la recette à supprimer

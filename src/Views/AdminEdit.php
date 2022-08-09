@@ -14,8 +14,6 @@ use App\Database;
 $db = new Database();
 $db->Connect();
 ?>
-
-
 <!DOCTYPE html>
 <html lang="fr">
 
@@ -81,125 +79,44 @@ $db->Connect();
                             </li>
                         </ul>
                 </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-success" type="submit" id="select">recherche</button>
-                    <select class="form-select" id="floatingSelect" name="select" aria-label="Floating label select example">
-                        <option value="1" <?php if ($order == 1) {
-                                                echo 'selected';
-                                            } ?>>Décroissant</option>
-                        <option value="2" <?php if ($order == 2) {
-                                                echo 'selected';
-                                            } ?>>Croissant</option>
-                    </select>
-                </form>
+
             </div>
         </div>
     </nav>
 
-    <body>
-        <h1 class="text-center my-3">Administration des recettes</h1>
-        <div class="container">
-            <div class="col">
+    <h1 class="text-center my-5">Détails de la recette</h1>
 
-                <table id="deleteRecette" class="table">
-                    <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">nom de la recette</th>
-                            <th scope="col">description</th>
-                            <th scope="col">Ingrédients</th>
-                            <th scope="col">temps de préparation</th>
-                            <th scope="col">difficulté</th>
-                            <th scope="col">type</th>
-                            <th scope="col">date de création</th>
-                            <th scope="col">Supprimer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php foreach ($accueils as $accueil) : ?>
-                            <tr>
-                                <td> <?= $accueil->getId() ?></td>
-                                <td> <?= $accueil->getName() ?></td>
-                                <td> <?= $accueil->getDescription() ?></td>
-                                <td> <?= $accueil->getIngredient() ?></td>
-                                <td> <?= $accueil->getTemps() ?></td>
-                                <td> <?= $accueil->getDifficulty() ?></td>
-                                <td> <?= $accueil->getType() ?></td>
-                                <td> <?= $accueil->getCreated_at() ?></td>
-                                <td> <button type="submit" onclick="deleteRecette" class="btn btn-outline-danger rounded-pill"><a href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></button></td>
-                            </tr>
-                        <?php endforeach; ?>
-                        <script>
-                            "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-                        </script>
 
-                        <!-- function sweet alert pour la suppression de la recette-->
-                        <!-- <script>
-                        $(document).ready(function() {
-                            $('#deleteRecette').on('click', 'button', function() {
-                                var id = $(this).closest('tr').find('td:first').text();
-                                var url = '?page=delete_recette&id=' + id;
-                            });
-                            $.ajax({
-                                url: 'index.php?page=admin',
-                                type: 'GET',
-
-                                success: function(data) {
-                                    swal({
-                                        title: "Voulez-vous vraiment supprimer cette recette ?",
-                                        text: "Cette action est irréversible!",
-                                        icon: "warning",
-                                        dangerMode: true,
-                                    })
-                                        .then((willDelete) => {
-                                            if (willDelete) {
-                                                window.location.href = '?page=delete_recette&id=' + id;
-                                            } else {
-                                                swal("La recette n'a pas été supprimée!");
-                                            }
-                                        });
-                                }
-                                
-                        
-                            });
-                        });
-                    </script>-->
-                    </tbody>
-                </table>
-                <hr>
-                <h1 class="text-center my-3">Administration des recettes</h1>
-                <!--formulaire de modification-->
-                <form id="ingredientsForm" method="post" class="form-control">
-                    <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
-                        <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette">
-                        <input type="text" name="description" class="p-2 m-2 " placeholder="description de la recette">
-                        <input type="text" name="ingredients" class="p-2 m-2 " placeholder="ingredients">
-                        <input type="time" name="temps" class="p-2 m-2 " placeholder="Temps de préparation">
-                        <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté">
-                            <option>Difficulté de la recette</option>
-                            <option value="facile">Facile</option>
-                            <option value="moyen">Moyen</option>
-                            <option value="dur">Dur</option>
-                        </select>
-                        <select type="text" name="type" class="p-2 m-2 " placeholder="dificulté">
-                            <option>Type de Recette</option>
-                            <option value="entrer">Entrées</option>
-                            <option value="plats">Plats</option>
-                            <option value="desserts">Désserts</option>
-                        </select>
-                        <div class="mb-3">
-                            <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                            <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
+    <div class="container d-flex flex-wrap justify-content-center">
+        <?php foreach ($accueil as $accueils) : ?>
+            <div class="card m-4 rounded shadow-lg" style="width: 18rem;">
+                <a href="#"><img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;"></a>
+                <div class="card-body">
+                    <h5 class="card-title text-center text-capitalize"><?= $accueils['name'] ?></h5>
+                    <h6 class="card-title text-center text-uppercase"><?= $accueils['type'] ?></h6>
+                    <ul class="d-flex justify-content-evenly" style="list-style:none;">
+                        <!----------------------fenetre pop ingédients--------------->
+                        <!-- Button trigger modal -->
+                        <p class="text-center"> <?= $accueils['ingredients']?></p>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Ingredients de la recette</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                            <button type="submit" class="btn btn-outline-secondary  " value="envoyer">Ajouter votre recette</button>
-                        </div>
-                    </div>
-                </form>
+                    </ul>
+
+                    <p class="text-center"> <?= $accueils['temps']?></p>
+                    <p class="text-center"> <?= $accueils['description']?></p>
+                    <p class="text-center"> <?= $accueils['created_at']?></p>
+                </div>
             </div>
-        </div>
-        </div>
-
-    </body>
-
-</html>
+        <?php endforeach; ?>
+    </div>

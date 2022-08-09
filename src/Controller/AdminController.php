@@ -33,7 +33,9 @@ class AdminController extends AbstractController
         }
         if(isset($_GET['type'])) {
             $type = $_GET['type'];
-        } 
+        } else{
+            $type = '';
+        }
 
 
         $ModelAccueil = new ModelAccueil();
@@ -61,4 +63,16 @@ class AdminController extends AbstractController
         exit;
         $this->sendJson(['success' => false]);
     }
+
+    public function edit()
+    {
+        $ModelAccueil = new ModelAccueil();
+    if(isset($_GET['id']) && !empty($_GET['id'])) {
+        $id = $_GET['id'];
+        $accueil = $ModelAccueil->editRecette($id);
+        $this->render('AdminEdit.php', [
+            'accueil' => $accueil
+        ]);
+        }
+}
 }

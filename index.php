@@ -31,9 +31,9 @@ class Application
             'controller' => 'AdminController',
             'method' => 'delete'
         ],
-        'insert' => [
+        'edit-recette' => [
             'controller' => 'AdminController',
-            'method' => 'insert'
+            'method' => 'edit'
         ],
         'insert_text' => [
             'controller' => 'ArticleController',
