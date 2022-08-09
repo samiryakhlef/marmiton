@@ -71,17 +71,16 @@ class ModelAccueil
                 ,`created_at`
 
                 FROM ' . self::TABLE_NAME . '
-                WHERE type = :type
-                ORDER BY id;
+                WHERE type = :type;
         ';
         $pdoStatement = $this->pdo->prepare($sql);
         $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
         $pdoStatement->execute();
-        return $pdoStatement->fetchObject(self::class);
+        return $pdoStatement;
     }
 
     //je créer un fonction pour compter les pages courantes 
-    public function findByPage($page, $order, $research)
+    public function findByPage($page, $order, $research,$type)
     {   // On détermine le nombre d'articles par page
         $parPage = 10;
 
@@ -92,12 +91,24 @@ class ModelAccueil
         } else {
             $order = 'ASC';
         }
+        
+        if($type == 1){
+            $type = 'entrer';
+        }if($type == 2){
+            $type = 'plats';
+        }if($type == 3){
+            $type = 'desserts';
+        }
 
         if ($research != null) {
             $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' 
             WHERE type LIKE "%' . $research . '%" OR name LIKE "%' . $research . '%" OR ingredients LIKE "%' . $research . '%"
             ORDER BY `id` ' . $order;
-        } else {
+        }elseif ($type != null) {
+            $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' 
+            WHERE type LIKE "%' . $type . '%"
+            ORDER BY `id` ' . $order;
+        }else {
             $sql = 'SELECT
                 `id`
                 ,`name`
@@ -111,6 +122,7 @@ class ModelAccueil
                 ORDER BY `id` ' . $order . '
                 LIMIT ' . $pageDebut . ',' . $parPage;
         }
+    
         $pdoStatement = $this->pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;

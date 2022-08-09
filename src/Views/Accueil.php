@@ -68,11 +68,11 @@ $db->Connect();
                             Recettes
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#"> <strong>Entrée</strong></a>
+                            <li><a class="dropdown-item" href="index.php?type=1"> <strong>Entrée</strong></a>
                             <li class="list-group-item"></li>
-                            <li><a class="dropdown-item" href="#"><strong>Plats</strong></a>
+                            <li><a class="dropdown-item" href="index.php?type=2"><strong>Plats</strong></a>
                             </li>
-                            <li><a class="dropdown-item" href="#"><strong>Désserts</strong></a></li>
+                            <li><a class="dropdown-item" href="index.php?type=3"><strong>Désserts</strong></a></li>
                             <li>
                                 <hr class="dropdown-divider">
                             </li>
@@ -114,11 +114,8 @@ $db->Connect();
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ingredients de la recette</h5>
-
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        <h5 class="modal-title" id="exampleModalLabel">Ingredients de la recette</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
-
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
                                     </div>
@@ -132,7 +129,7 @@ $db->Connect();
                     <p class="text-center"> <?= $accueil->getCreated_At() ?></p>
                 </div>
             </div>
-        <?php endforeach; ?>
+            <?php endforeach; ?>
     </div>
     <!------------------Pagination -------------------->
     <nav class="d-flex justify-content-center">
