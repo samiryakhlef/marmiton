@@ -50,30 +50,12 @@ use App\Controller\IngredientsController;
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?page=projets">Accueil</a>
+                        <a class="nav-link active" aria-current="page" href="?page=home">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="?page=ingredients">Ajouter une recette</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Recettes
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#"> <strong>Entrée</strong></a>
-                            <li class="list-group-item"></li>
-                            <li><a class="dropdown-item" href="#"><strong>Plats</strong></a>
-                            </li>
-                            <li><a class="dropdown-item" href="#"><strong>Désserts</strong></a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                        </ul>
-                </ul>
-                <form class="d-flex">
-                    <input class="form-control me-2" type="search" placeholder="Rechercher" aria-label="Search">
-                    <button class="btn btn-outline-success" type="submit">recherche</button>
-                </form>
+                </ul> 
             </div>
         </div>
     </nav>
@@ -94,7 +76,7 @@ use App\Controller\IngredientsController;
             <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
                 <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette">
                 <input type="text" name="description" class="p-2 m-2 " placeholder="description de la recette">
-                <input type="text" name="ingredients" class="p-2 m-2 " placeholder="ingredients">
+                <textarea type="text" name="ingredients" class="p-2 m-2 " placeholder="ingredients"></textarea>
                 <input type="time" name="temps" class="p-2 m-2 " placeholder="Temps de préparation">
                 <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté">
                     <option>Difficulté de la recette</option>
@@ -123,7 +105,8 @@ use App\Controller\IngredientsController;
     </script>
 
 <!-- function sweet alert pour le formulaire d'ajout de recette-->
-<script>
+
+<!--<script>
     $(document).ready(function(){
         $("#ingredientsForm").submit(function(e){
             e.preventDefault();
@@ -156,7 +139,7 @@ use App\Controller\IngredientsController;
                 }
             });
         });
-</script>
+</script>-->
 </body>
 
 </html>

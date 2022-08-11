@@ -57,7 +57,7 @@ $db->Connect();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?page=projets">Accueil</a>
+                        <a class="nav-link active" aria-current="page" href="?page=home">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="?page=ingredients">Ajouter une recette</a>
@@ -66,67 +66,48 @@ $db->Connect();
                         <a class="nav-link active" aria-current="page" href="?page=admin">
                             Administration</a>
                     </li>
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            Recettes
-                        </a>
-                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <li><a class="dropdown-item" href="#"> <strong>Entrée</strong></a>
-                            <li class="list-group-item"></li>
-                            <li><a class="dropdown-item" href="#"><strong>Plats</strong></a>
-                            </li>
-                            <li><a class="dropdown-item" href="#"><strong>Désserts</strong></a></li>
-                            <li>
-                                <hr class="dropdown-divider">
-                            </li>
-                        </ul>
+                    
                 </ul>
-                <form class="d-flex">
-                    <button class="btn btn-outline-success" type="submit" id="select">recherche</button>
-                    <select class="form-select" id="floatingSelect" name="select" aria-label="Floating label select example">
-                        <option value="1" <?php if ($order == 1) {
-                                                echo 'selected';
-                                            } ?>>Décroissant</option>
-                        <option value="2" <?php if ($order == 2) {
-                                                echo 'selected';
-                                            } ?>>Croissant</option>
-                    </select>
-                </form>
+                
             </div>
         </div>
     </nav>
 
     <body>
-        <h1 class="text-center my-3">Administration des recettes</h1>
+        <h1 class="text-center">Administration des recettes</h1>
         <div class="container">
-            <div class="col">
+            <div class="col-md-2 col-lg-5 col-xl-9 mx-auto rounded">
 
                 <table id="deleteRecette" class="table">
                     <thead>
-                        <tr>
-                            <th scope="col">id</th>
-                            <th scope="col">nom de la recette</th>
-                            <th scope="col">description</th>
-                            <th scope="col">Ingrédients</th>
-                            <th scope="col">temps de préparation</th>
-                            <th scope="col">difficulté</th>
-                            <th scope="col">type</th>
-                            <th scope="col">date de création</th>
-                            <th scope="col">Supprimer</th>
+                        <tr style="border: 1px solid black;">
+                            <th scope="col" class="table-dark">id</th>
+                            <th scope="col" class="table-dark">Nom </th>
+                            <th scope="col" class="table-dark">Description</th>
+                            <th scope="col" class="table-dark">Ingrédients</th>
+                            <th scope="col" class="table-dark">Temps de préparation</th>
+                            <th scope="col" class="table-dark">Difficulté</th>
+                            <th scope="col" class="table-dark">Type</th>
+                            <th scope="col" class="table-dark">Date de création</th>
+                            <th scope="col" class="table-dark">Supprimer</th>
+                            <th scope="col" class="table-dark">Modifier</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <!--boucle pour afficher la liste des recettes présente en base de données-->
                         <?php foreach ($accueils as $accueil) : ?>
                             <tr>
-                                <td> <?= $accueil->getId() ?></td>
-                                <td> <?= $accueil->getName() ?></td>
-                                <td> <?= $accueil->getDescription() ?></td>
-                                <td> <?= $accueil->getIngredient() ?></td>
-                                <td> <?= $accueil->getTemps() ?></td>
-                                <td> <?= $accueil->getDifficulty() ?></td>
-                                <td> <?= $accueil->getType() ?></td>
-                                <td> <?= $accueil->getCreated_at() ?></td>
-                                <td> <button type="submit" onclick="deleteRecette" class="btn btn-outline-danger rounded-pill"><a href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></button></td>
+                                <td class="table-danger"> <?= $accueil->getId() ?></td>
+                                <td class="table-secondary"> <?= $accueil->getName() ?></td>
+                                <td class="table-danger"> <?= $accueil->getDescription() ?></td>
+                                <td class="table-secondary"><?= substr($accueil->getIngredients(),0,100) ?></td>
+                                
+                                <td class="table-danger"> <?= $accueil->getTemps() ?></td>
+                                <td class="table-secondary"> <?= $accueil->getDifficulty() ?></td>
+                                <td class="table-danger"> <?= $accueil->getType() ?></td>
+                                <td class="table-secondary"> <?= $accueil->getCreated_at() ?></td>
+                                <td><a class="btn btn-outline-danger rounded-pill" href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></td>
+                                <td><a class="btn btn-outline-warning rounded-pill" href="?page=update_recette&id=<?= $accueil->getId() ?>">modifier</a></button></td>
                             </tr>
                         <?php endforeach; ?>
                         <script>
@@ -134,7 +115,7 @@ $db->Connect();
                         </script>
 
                         <!-- function sweet alert pour la suppression de la recette-->
-                        <!-- <script>
+                        <script>
                         $(document).ready(function() {
                             $('#deleteRecette').on('click', 'button', function() {
                                 var id = $(this).closest('tr').find('td:first').text();
@@ -163,43 +144,9 @@ $db->Connect();
                         
                             });
                         });
-                    </script>-->
+                    </script>
                     </tbody>
                 </table>
-                <hr>
-                <h1 class="text-center my-3">Administration des recettes</h1>
-                <!--formulaire de modification-->
-                <form id="ingredientsForm" method="post" class="form-control">
-                    <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
-                        <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette">
-                        <input type="text" name="description" class="p-2 m-2 " placeholder="description de la recette">
-                        <input type="text" name="ingredients" class="p-2 m-2 " placeholder="ingredients">
-                        <input type="time" name="temps" class="p-2 m-2 " placeholder="Temps de préparation">
-                        <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté">
-                            <option>Difficulté de la recette</option>
-                            <option value="facile">Facile</option>
-                            <option value="moyen">Moyen</option>
-                            <option value="dur">Dur</option>
-                        </select>
-                        <select type="text" name="type" class="p-2 m-2 " placeholder="dificulté">
-                            <option>Type de Recette</option>
-                            <option value="entrer">Entrées</option>
-                            <option value="plats">Plats</option>
-                            <option value="desserts">Désserts</option>
-                        </select>
-                        <div class="mb-3">
-                            <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                            <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
-                        </div>
-                        <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                            <button type="submit" class="btn btn-outline-secondary  " value="envoyer">Ajouter votre recette</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-        </div>
-
     </body>
 
 </html>

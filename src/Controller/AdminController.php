@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Database\Recette;
 use App\Model\ModelAccueil;
 
 class AdminController extends AbstractController
@@ -31,9 +32,9 @@ class AdminController extends AbstractController
         if (isset($_GET['select'])) {
             $order = $_GET['select'];
         }
-        if(isset($_GET['type'])) {
+        if (isset($_GET['type'])) {
             $type = $_GET['type'];
-        } else{
+        } else {
             $type = '';
         }
 
@@ -67,12 +68,41 @@ class AdminController extends AbstractController
     public function edit()
     {
         $ModelAccueil = new ModelAccueil();
-    if(isset($_GET['id']) && !empty($_GET['id'])) {
-        $id = $_GET['id'];
-        $accueil = $ModelAccueil->editRecette($id);
-        $this->render('AdminEdit.php', [
-            'accueil' => $accueil
-        ]);
+        if (isset($_GET['id']) && !empty($_GET['id'])) {
+            $id = $_GET['id'];
+            $accueil = $ModelAccueil->editRecette($id);
+            $this->render('AdminEdit.php', [
+                'accueil' => $accueil
+            ]);
         }
-}
-}
+    }
+    public function update()
+    {
+        $ModelAccueil = new ModelAccueil();
+        if(isset($_GET['id']) && !empty($_GET['id'])){
+            $id = strip_tags($_GET['id']);
+            $recette = $ModelAccueil->editRecette($id);
+            
+        }
+
+        if (isset($_GET['id']) && !empty($_GET['id']) && isset($_POST['name']) && !empty($_POST['name'])) {
+            $id = $_GET['id'];
+            $name = $_POST['name'];
+            $description = $_POST['description'];
+            $ingredients = $_POST['ingredients'];
+            $difficulty = $_POST['difficulty'];
+            $type = $_POST['type'];
+
+            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $difficulty, $type);
+            header('Location: index.php?page=admin');
+            exit;
+        }
+            $this->render('Update.php',[
+                'recette' => $recette
+            ]);
+            
+        }
+
+        
+    }
+

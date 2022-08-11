@@ -18,16 +18,36 @@ $db->Connect();
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" defer></script>
-    <title>Marmiton</title>
+    <title>Blogzine - Blog and Magazine Bootstrap 5 Theme</title>
+    <!-- Meta Tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="author" content="Webestica.com">
+    <meta name="description" content="Bootstrap based News, Magazine and Blog Theme">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="assets/images/favicon.ico">
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;700&family=Rubik:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <!-- Plugins CSS -->
+    <link rel="stylesheet" type="text/css" href="assets/vendor/font-awesome/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css">
+
+    <!-- Theme CSS -->
+    <link id="style-switch" rel="stylesheet" type="text/css" href="assets/css/style.css">
+
+</head>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" defer></script>
+<script src="https://use.fontawesome.com/releases/vVERSION/js/all.js" data-auto-replace-svg="nest" defer></script>
+<title>Marmiton</title>
 </head>
 
 <body>
@@ -55,7 +75,7 @@ $db->Connect();
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="?page=projets">Accueil</a>
+                        <a class="nav-link active" aria-current="page" href="?page=home">Accueil</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="?page=ingredients">Ajouter une recette</a>
@@ -84,39 +104,66 @@ $db->Connect();
         </div>
     </nav>
 
-    <h1 class="text-center my-5">Détails de la recette</h1>
 
-
-    <div class="container d-flex flex-wrap justify-content-center">
-        <?php foreach ($accueil as $accueils) : ?>
-            <div class="card m-4 rounded shadow-lg" style="width: 18rem;">
-                <a href="#"><img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;"></a>
-                <div class="card-body">
-                    <h5 class="card-title text-center text-capitalize"><?= $accueils['name'] ?></h5>
-                    <h6 class="card-title text-center text-uppercase"><?= $accueils['type'] ?></h6>
-                    <ul class="d-flex justify-content-evenly" style="list-style:none;">
-                        <!----------------------fenetre pop ingédients--------------->
-                        <!-- Button trigger modal -->
-                        <p class="text-center"> <?= $accueils['ingredients']?></p>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ingredients de la recette</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    <!-- Card item START -->
+    <section class="position-relative pt-5">
+        <div class="container ">
+            <div class="row mx-5">
+                <!-- Main Post START -->
+                <div class="text-center">
+                    <div class="row mx-5 ">
+                        <!-- Card item START -->
+                        <div class="col-10 mx-5">
+                            <div class="card overflow-hidden">
+                                <!-- Card img -->
+                                <div class="position-relative">
+                                    <img class="card-img" src="assets/images/blog/16by9/01.jpg" alt="Card image">
+                                </div>
+                                <div class="card-body px-0 pt-3">
+                                    <h2 class="card-title"><a href="post-single-3.html" class="btn-link text-reset fw-bold"><?php echo $accueil['name'] ?></a></h2>
+                                    <p class="text-uppercase"></i><?php echo $accueil['description'] ?></p>
+                                    <div class="container">
+                                    <ul>
+                                        <?php foreach(explode(",",$accueil['ingredients']) as $ingredient) : ?>
+                                            <li><?php echo $ingredient ?></li>
+                                        <?php endforeach ?>
+                                    </ul>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                    </div>
+                                    <!-- Card info -->
+                                    <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
+                                        <li class="nav-item">
+                                            <div class="nav-link">
+                                                <div class="d-flex align-items-center position-relative">
+                                                    <div class="avatar avatar-xs">
+                                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
+                                                    </div>
+                                                    <span class="ms-3">by <a href="#" class="stretched-link text-reset btn-link">Samuel</a></span>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="nav-item">Jan 22, 2022</li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
-                    </ul>
-
-                    <p class="text-center"> <?= $accueils['temps']?></p>
-                    <p class="text-center"> <?= $accueils['description']?></p>
-                    <p class="text-center"> <?= $accueils['created_at']?></p>
+                    </div>
                 </div>
             </div>
-        <?php endforeach; ?>
-    </div>
+        </div>
+    </section>
+    <!-- Card item END -->
+
+    <!-- =======================
+JS libraries, plugins and custom scripts -->
+
+    <!-- Bootstrap JS -->
+    <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Vendors -->
+    <script src="assets/vendor/sticky-js/sticky.min.js"></script>
+
+    <!-- Template Functions -->
+    <script src="assets/js/functions.js"></script>
+</body>
+
+</html>

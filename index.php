@@ -11,10 +11,14 @@ require 'vendor/autoload.php';
 class Application
 {
     const AUTHORIZED_PAGES = [
-        'projets' => [
-            'controller' => 'AccueilController',
+        'home' => [
+            'controller' => 'HomeController',
             'method' => 'index'
         ],
+        // 'projets' => [
+        //     'controller' => 'AccueilController',
+        //     'method' => 'index'
+        // ],
         'ingredients' => [
             'controller' => 'IngredientsController',
             'method' => 'index'
@@ -35,14 +39,19 @@ class Application
             'controller' => 'AdminController',
             'method' => 'edit'
         ],
-        'insert_text' => [
-            'controller' => 'ArticleController',
-            'method' => 'insert_text'
+        'update_recette' => [
+            'controller' => 'AdminController',
+            'method' => 'update'
         ],
+        'error404' => [
+            'controller' => 'ErrorController',
+            'method' => 'error404'
+        ],
+        
         
     ];
 
-    const DEFAULT_ROUTE = 'projets';
+    const DEFAULT_ROUTE = 'home';
 
     private function match($route_name)
     {

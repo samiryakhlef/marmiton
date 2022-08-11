@@ -96,38 +96,20 @@ $db->Connect();
     <h1 class="titlerecipe text-center">Liste des recettes</h1>
 
     <!------------------Afficher des recettes-------------------->
+    
     <div class="container d-flex flex-wrap justify-content-center">
         <?php foreach ($accueils as $accueil) : ?>
-            <div class="card m-4 rounded shadow-lg" style="width: 18rem;">
-                <a href="?page=edit-recette&id=<?= $accueil->getId() ?>"><img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;"></a>
-                <div class="card-body">
+            <div class="card m-4 rounded" style="width: 20rem;">
+                <a href="?page=edit-recette&id=<?= $accueil->getId() ?>">
+                    <img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;">
+                </a>
+                <!-- <div class="card-body">
                     <h5 class="card-title text-center text-capitalize"><?= $accueil->getName() ?></h5>
                     <h6 class="card-title text-center text-uppercase"><?= $accueil->getType() ?></h6>
-                    <ul class="d-flex justify-content-evenly" style="list-style:none;">
-                        <!----------------------fenetre pop ingédients--------------->
-                        <!-- Button trigger modal -->
-                        <button type="button" class="btn btn-outline" style=" color:rgb(254, 111, 95);" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                            Ingrédients
-                        </button>
-                        <!-- Modal -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                            <div class="modal-dialog">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="exampleModalLabel">Ingredients de la recette</h5> <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </ul>
-
-                    <p class="text-center"> <?= $accueil->getTemps() ?></p>
-                    <p class="text-center"> <?= $accueil->getDescription() ?></p>
-                    <p class="text-center"> <?= $accueil->getCreated_At() ?></p>
-                </div>
+                        <p class="text-center"> <?= $accueil->getTemps() ?></p>
+                        <p class="text-center"> <?= $accueil->getDescription() ?></p>
+                        <p class="text-center"> <?= $accueil->getCreated_At() ?></p>
+                </div>-->
             </div>
             <?php endforeach; ?>
     </div>

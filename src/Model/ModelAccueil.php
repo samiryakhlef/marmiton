@@ -11,7 +11,7 @@ class ModelAccueil
     public $id;
     public $name;
     public $description;
-    public $ingredient;
+    public $ingredients;
     public $difficulty;
     public $type;
     public $created_at;
@@ -40,7 +40,7 @@ class ModelAccueil
     // je récupère par ma BBD par ID
     public function findById($id)
     {
-        $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = :id';
+        $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = '.$id;
         $query = $this->pdo->prepare($sql);
         $result = $query->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
@@ -51,7 +51,21 @@ class ModelAccueil
         $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = ?';
         $query = $this->pdo->prepare($sql);
         $query->execute([$id]);
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $query->fetch(PDO::FETCH_ASSOC);
+    }
+
+    public function updateRecette($id, $name, $description, $ingredients, $difficulty, $type)
+
+    {
+        $ql = 'UPDATE ' . self::TABLE_NAME . ' SET name = :name, description = :description, ingredients = :ingredients, difficulty = :difficulty, type = :type WHERE id = :id';
+        $query = $this->pdo->prepare($ql);
+        $query->bindValue(':name', $name, PDO::PARAM_STR);
+        $query->bindValue(':description', $description, PDO::PARAM_STR);
+        $query->bindValue(':ingredients', $ingredients, PDO::PARAM_STR);
+        $query->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
+        $query->bindValue(':type', $type, PDO::PARAM_STR);
+        $query->bindValue(':id', $id, PDO::PARAM_INT);
+        $query->execute();
     }
 
     // je créer une fonction delete qui prend en paramètre l'id de la recette à supprimer
@@ -65,26 +79,26 @@ class ModelAccueil
     }
 
     // je créer ma bdd par type
-    public function findByType($type)
-    {
-        $sql = 'SELECT
-                `id`
-                ,`name`
-                ,`description`
-                ,`ingredients`
-                ,`temps`
-                ,`difficulty`
-                ,`type`
-                ,`created_at`
+    // public function findByType($type)
+    // {
+    //     $sql = 'SELECT
+    //             `id`
+    //             ,`name`
+    //             ,`description`
+    //             ,`ingredients`
+    //             ,`temps`
+    //             ,`difficulty`
+    //             ,`type`
+    //             ,`created_at`
 
-                FROM ' . self::TABLE_NAME . '
-                WHERE type = :type;
-        ';
-        $pdoStatement = $this->pdo->prepare($sql);
-        $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
-        $pdoStatement->execute();
-        return $pdoStatement;
-    }
+    //             FROM ' . self::TABLE_NAME . '
+    //             WHERE type = :type;
+    //     ';
+    //     $pdoStatement = $this->pdo->prepare($sql);
+    //     $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
+    //     $pdoStatement->execute();
+    //     return $pdoStatement;
+    // }
 
     //je créer un fonction pour compter les pages courantes 
     public function findByPage($page, $order, $research,$type)
@@ -222,9 +236,9 @@ class ModelAccueil
     /**
      * Get the value of ingredient
      */ 
-    public function getIngredient()
+    public function getIngredients()
     {
-        return $this->ingredient;
+        return $this->ingredients;
     }
 
     /**
@@ -232,9 +246,9 @@ class ModelAccueil
      *
      * @return  self
      */ 
-    public function setIngredient($ingredient)
+    public function setIngredients($ingredients)
     {
-        $this->ingredient = $ingredient;
+        $this->ingredient = $ingredients;
 
         return $this;
     }
