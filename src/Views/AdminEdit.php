@@ -18,7 +18,7 @@ $db->Connect();
 <html lang="fr">
 
 <head>
-    <title>Blogzine - Blog and Magazine Bootstrap 5 Theme</title>
+    <title>Marmiton</title>
     <!-- Meta Tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -120,28 +120,33 @@ $db->Connect();
                                     <img class="card-img" src="assets/images/blog/16by9/01.jpg" alt="Card image">
                                 </div>
                                 <div class="card-body px-0 pt-3">
-                                    <h2 class="card-title"><a href="post-single-3.html" class="btn-link text-reset fw-bold"><?php echo $accueil['name'] ?></a></h2>
-                                    <p class="text-uppercase"></i><?php echo $accueil['description'] ?></p>
-                                    <div class="container">
-                                    <ul>
-                                        <?php foreach(explode(",",$accueil['ingredients']) as $ingredient) : ?>
+                                    <h2 class="text-uppercase "><a href="#" class="btn-link text-reset fw-bolder"><?php echo $accueil['name'] ?></a></h2>
+                                    <p class="text-uppercase fs-5"></i><?php echo $accueil['description'] ?></p>
+                                    <ul class="d-flex justify-content-evenly fs-6" style="list-style-type:none; text-decoration: underline; color:darksalmon;">
+                                        <li> <svg class="RCP__sc-1qnswg8-2 jTcJOx" xmlns="http://www.w3.org/2000/svg" width="27" height="32" viewBox="0 0 27 32">
+                                                <path d="M13.207 22.759a2.151 2.151 0 1 0 0 4.302 2.151 2.151 0 0 0 0-4.302z"></path>
+                                                <path d="M20.806 27.979a4.326 4.326 0 0 1-3.451 1.745H9.06a4.329 4.329 0 0 1-3.451-1.745c-1.57-2.108-2.651-4.777-3.127-7.613h21.451c-.475 2.837-1.556 5.505-3.127 7.613zM5.513 6.533c2.062-2.701 4.795-4.188 7.694-4.188s5.632 1.487 7.695 4.188c2.131 2.792 3.305 6.549 3.305 10.577 0 .35-.013.7-.031 1.049h-3.41v-4.683a1.103 1.103 0 1 0-2.206 0v4.683h-4.249v-4.683a1.103 1.103 0 1 0-2.206 0v4.683H7.857v-4.683a1.103 1.103 0 0 0-2.207 0v4.683H2.24a19.305 19.305 0 0 1-.032-1.049c0-4.029 1.174-7.785 3.306-10.577zm17.142-1.34C20.166 1.933 16.81.137 13.206.137S6.247 1.933 3.758 5.193C1.334 8.368-.001 12.6-.001 17.11c0 4.47 1.399 8.912 3.838 12.187a6.545 6.545 0 0 0 5.221 2.634h8.295a6.547 6.547 0 0 0 5.221-2.633c2.439-3.275 3.838-7.717 3.838-12.187 0-4.51-1.335-8.742-3.759-11.917z"></path>
+                                            </svg> Temps de préparation:<?php echo $accueil['temps'] ?></li>
+                                        <li> <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32">
+                                                <path d="M14.675 15.867c0-.607-.498-1.098-1.111-1.098H2.736c-.613 0-1.111.491-1.111 1.097s.498 1.097 1.111 1.097h10.827c.613 0 1.111-.491 1.111-1.097l.001.001zm-10.586 3.45c-.614 0-1.111.491-1.111 1.097s.497 1.098 1.111 1.098h7.309c.613 0 1.11-.492 1.11-1.098s-.497-1.097-1.11-1.097H4.089zm16.243-8.562c-.613 0-1.11.491-1.11 1.097v6.421c0 .606.497 1.097 1.11 1.097h4.873c.613 0 1.11-.491 1.11-1.097s-.497-1.097-1.11-1.097h-3.762v-5.325c0-.606-.498-1.097-1.111-1.097z"></path>
+                                                <path d="M21.442 6.528V4.657h1.867c.613 0 1.111-.491 1.111-1.098s-.498-1.097-1.111-1.097h-5.956c-.613 0-1.11.491-1.11 1.097s.497 1.098 1.11 1.098h1.867v1.871a11.694 11.694 0 0 0-7.515 3.693H1.109c-.613 0-1.11.491-1.11 1.097s.497 1.097 1.11 1.097h11.099c.329 0 .641-.144.852-.393a9.489 9.489 0 0 1 7.269-3.352c5.209 0 9.447 4.188 9.447 9.336s-4.238 9.336-9.447 9.336a9.493 9.493 0 0 1-7.023-3.113 1.119 1.119 0 0 0-.827-.365H1.108c-.613-.001-1.11.491-1.11 1.097s.497 1.097 1.11 1.097h10.889a11.734 11.734 0 0 0 8.332 3.478c6.434 0 11.669-5.173 11.669-11.532 0-5.989-4.643-10.924-10.557-11.478z"></path>
+                                            </svg>  Type de recette: <?php echo $accueil['type'] ?></li>
+                                    </ul>
+                                    <ul style="list-style-type:none;">
+                                        <?php foreach (explode(",", $accueil['ingredients']) as $ingredient) : ?>
                                             <li><?php echo $ingredient ?></li>
                                         <?php endforeach ?>
                                     </ul>
-                                    </div>
+                                    <!--affiche les étapes de la recette-->
+                                    <ol>
+                                        <?php foreach (explode(".", $accueil['steps']) as $step) : ?>
+                                            <li><?php echo $step ?></li>
+                                        <?php endforeach ?>
+                                    </ol>
+                                            <p class="text-uppercase"></p>
                                     <!-- Card info -->
                                     <ul class="nav nav-divider align-items-center d-none d-sm-inline-block">
-                                        <li class="nav-item">
-                                            <div class="nav-link">
-                                                <div class="d-flex align-items-center position-relative">
-                                                    <div class="avatar avatar-xs">
-                                                        <img class="avatar-img rounded-circle" src="assets/images/avatar/01.jpg" alt="avatar">
-                                                    </div>
-                                                    <span class="ms-3">by <a href="#" class="stretched-link text-reset btn-link">Samuel</a></span>
-                                                </div>
-                                            </div>
-                                        </li>
-                                        <li class="nav-item">Jan 22, 2022</li>
+                                        <li class="nav-item fs-5"><?php echo $accueil['created_at'] ?></li>
                                     </ul>
                                 </div>
                             </div>

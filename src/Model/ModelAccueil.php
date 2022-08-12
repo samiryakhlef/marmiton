@@ -12,6 +12,7 @@ class ModelAccueil
     public $name;
     public $description;
     public $ingredients;
+    public $steps;
     public $difficulty;
     public $type;
     public $created_at;
@@ -54,14 +55,15 @@ class ModelAccueil
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateRecette($id, $name, $description, $ingredients, $difficulty, $type)
+    public function updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type)
 
     {
-        $ql = 'UPDATE ' . self::TABLE_NAME . ' SET name = :name, description = :description, ingredients = :ingredients, difficulty = :difficulty, type = :type WHERE id = :id';
+        $ql = 'UPDATE ' . self::TABLE_NAME . ' SET name = :name, description = :description, ingredients = :ingredients, steps = :steps, difficulty = :difficulty, type = :type WHERE id = :id';
         $query = $this->pdo->prepare($ql);
         $query->bindValue(':name', $name, PDO::PARAM_STR);
         $query->bindValue(':description', $description, PDO::PARAM_STR);
         $query->bindValue(':ingredients', $ingredients, PDO::PARAM_STR);
+        $query->bindValue(':steps', $steps, PDO::PARAM_STR);
         $query->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
         $query->bindValue(':type', $type, PDO::PARAM_STR);
         $query->bindValue(':id', $id, PDO::PARAM_INT);
@@ -78,27 +80,7 @@ class ModelAccueil
         return $query;
     }
 
-    // je créer ma bdd par type
-    // public function findByType($type)
-    // {
-    //     $sql = 'SELECT
-    //             `id`
-    //             ,`name`
-    //             ,`description`
-    //             ,`ingredients`
-    //             ,`temps`
-    //             ,`difficulty`
-    //             ,`type`
-    //             ,`created_at`
-
-    //             FROM ' . self::TABLE_NAME . '
-    //             WHERE type = :type;
-    //     ';
-    //     $pdoStatement = $this->pdo->prepare($sql);
-    //     $pdoStatement->bindValue(':type', $type, PDO::PARAM_STR);
-    //     $pdoStatement->execute();
-    //     return $pdoStatement;
-    // }
+    
 
     //je créer un fonction pour compter les pages courantes 
     public function findByPage($page, $order, $research,$type)
@@ -135,6 +117,7 @@ class ModelAccueil
                 ,`name`
                 ,`description`
                 ,`ingredients`
+                ,`steps`
                 ,`temps`
                 ,`difficulty`
                 ,`type`
@@ -329,6 +312,26 @@ class ModelAccueil
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of steps
+     */ 
+    public function getSteps()
+    {
+        return $this->steps;
+    }
+
+    /**
+     * Set the value of steps
+     *
+     * @return  self
+     */ 
+    public function setSteps($steps)
+    {
+        $this->steps = $steps;
 
         return $this;
     }

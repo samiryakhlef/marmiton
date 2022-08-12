@@ -72,11 +72,12 @@ use App\Controller\IngredientsController;
 
         <!-------------------------vérification des champs du formulaire------------------------>
 
-        <form id="ingredientsForm" method="post" class="form-control">
+        <form id="ingredientsForm" method="post" class="form-control" enctype="multipart/form-data" >
             <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
                 <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette">
-                <input type="text" name="description" class="p-2 m-2 " placeholder="description de la recette">
+                <textarea type="text" name="description" class="p-2 m-2 " placeholder="description de la recette"></textarea>
                 <textarea type="text" name="ingredients" class="p-2 m-2 " placeholder="ingredients"></textarea>
+                <textarea type="text" name="steps" class="p-2 m-2 " placeholder="etape de la recette"></textarea>
                 <input type="time" name="temps" class="p-2 m-2 " placeholder="Temps de préparation">
                 <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté">
                     <option>Difficulté de la recette</option>
@@ -92,7 +93,7 @@ use App\Controller\IngredientsController;
                 </select>
                 <div class="mb-3">
                     <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                    <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
+                    <input name="file" class="form-control form-control-sm" id="formFileSm" type="file">
                 </div>
                 <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
                     <button type="submit" class="btn btn-outline-secondary  " value="envoyer">Ajouter votre recette</button>
@@ -109,7 +110,7 @@ use App\Controller\IngredientsController;
 <!--<script>
     $(document).ready(function(){
         $("#ingredientsForm").submit(function(e){
-            e.preventDefault();
+            
             var name = $("input[name=name]").val();
             var description = $("input[name=description]").val();
             var ingredients = $("input[name=ingredients]").val();

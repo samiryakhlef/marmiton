@@ -22,14 +22,15 @@ class IngredientsController extends AbstractController
             $ingredients = htmlentities(trim($_POST['ingredients']));
             $difficulty = htmlentities(trim($_POST['difficulty']));
             $type = htmlentities(trim($_POST['type']));
+            $steps = htmlentities(trim($_POST['steps']));
             $temps = htmlentities(trim($_POST['temps']));
 
             if (
-                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps)
+                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps) && !empty($steps)
             ) {
 
                 $recette = new Recette();
-                $recette->addRecette($name, $description, $ingredients, $difficulty, $type, $temps);
+                $recette->addRecette($name, $description, $ingredients, $difficulty,$steps , $type, $temps);
             }
         }
         $this->render('Ingredients.php');
@@ -42,16 +43,17 @@ class IngredientsController extends AbstractController
             $name = htmlentities(trim($_POST['name']));
             $description = htmlentities(trim($_POST['description']));
             $ingredients = htmlentities(trim($_POST['ingredients']));
+            $steps = htmlentities(trim($_POST['steps']));
             $difficulty = htmlentities(trim($_POST['difficulty']));
             $type = htmlentities(trim($_POST['type']));
             $temps = htmlentities(trim($_POST['temps']));
 
             if (
-                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps)
+                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps) && !empty($steps)
             ) {
 
                 $recette = new Recette();
-                $recette->addRecette($name, $description, $ingredients, $difficulty, $type, $temps);
+                $recette->addRecette($name, $description, $ingredients, $difficulty,$steps , $type, $temps);
                 $this->sendJson(['success' => true]);
             }
 

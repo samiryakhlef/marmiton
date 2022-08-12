@@ -66,9 +66,9 @@ $db->Connect();
                         <a class="nav-link active" aria-current="page" href="?page=admin">
                             Administration</a>
                     </li>
-                    
+
                 </ul>
-                
+
             </div>
         </div>
     </nav>
@@ -85,6 +85,7 @@ $db->Connect();
                             <th scope="col" class="table-dark">Nom </th>
                             <th scope="col" class="table-dark">Description</th>
                             <th scope="col" class="table-dark">Ingrédients</th>
+                            <th scope="col" class="table-dark">Etape de la recette</th>
                             <th scope="col" class="table-dark">Temps de préparation</th>
                             <th scope="col" class="table-dark">Difficulté</th>
                             <th scope="col" class="table-dark">Type</th>
@@ -99,54 +100,54 @@ $db->Connect();
                             <tr>
                                 <td class="table-danger"> <?= $accueil->getId() ?></td>
                                 <td class="table-secondary"> <?= $accueil->getName() ?></td>
-                                <td class="table-danger"> <?= $accueil->getDescription() ?></td>
-                                <td class="table-secondary"><?= substr($accueil->getIngredients(),0,100) ?></td>
-                                
-                                <td class="table-danger"> <?= $accueil->getTemps() ?></td>
-                                <td class="table-secondary"> <?= $accueil->getDifficulty() ?></td>
-                                <td class="table-danger"> <?= $accueil->getType() ?></td>
-                                <td class="table-secondary"> <?= $accueil->getCreated_at() ?></td>
+                                <td class="table-danger"> <?= substr($accueil->getDescription(),0 ,100) ?></td>
+                                <td class="table-secondary"><?= substr($accueil->getIngredients(), 0, 100) ?></td>
+                                <td class="table-danger"> <?= substr($accueil->getSteps(),0 ,100) ?></td>
+                                <td class="table-secondary"> <?= $accueil->getTemps() ?></td>
+                                <td class="table-danger"> <?= $accueil->getDifficulty() ?></td>
+                                <td class="table-secondary"> <?= $accueil->getType() ?></td>
+                                <td class="table-danger"> <?= $accueil->getCreated_at() ?></td>
                                 <td><a class="btn btn-outline-danger rounded-pill" href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></td>
                                 <td><a class="btn btn-outline-warning rounded-pill" href="?page=update_recette&id=<?= $accueil->getId() ?>">modifier</a></button></td>
                             </tr>
                         <?php endforeach; ?>
+
+                    </tbody>
+                </table>
                         <script>
                             "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
                         </script>
+                <!-- function sweet alert pour la suppression de la recette-->
+                <!--<script>
+$(document).ready(function() {
+    $('#deleteRecette').on('click', 'button', function() {
+        var id = $(this).closest('tr').find('td:first').text();
+        var url = '?page=delete_recette&id=' + id;
+    });
+    $.ajax({
+        url: 'index.php?page=admin',
+        type: 'GET',
 
-                        <!-- function sweet alert pour la suppression de la recette-->
-                        <script>
-                        $(document).ready(function() {
-                            $('#deleteRecette').on('click', 'button', function() {
-                                var id = $(this).closest('tr').find('td:first').text();
-                                var url = '?page=delete_recette&id=' + id;
-                            });
-                            $.ajax({
-                                url: 'index.php?page=admin',
-                                type: 'GET',
+        success: function(data) {
+            swal({
+                title: "Voulez-vous vraiment supprimer cette recette ?",
+                text: "Cette action est irréversible!",
+                icon: "warning",
+                dangerMode: true,
+            })
+                .then((willDelete) => {
+                    if (willDelete) {
+                        window.location.href = '?page=delete_recette&id=' + id;
+                    } else {
+                        swal("La recette n'a pas été supprimée!");
+                    }
+                });
+        }
+        
 
-                                success: function(data) {
-                                    swal({
-                                        title: "Voulez-vous vraiment supprimer cette recette ?",
-                                        text: "Cette action est irréversible!",
-                                        icon: "warning",
-                                        dangerMode: true,
-                                    })
-                                        .then((willDelete) => {
-                                            if (willDelete) {
-                                                window.location.href = '?page=delete_recette&id=' + id;
-                                            } else {
-                                                swal("La recette n'a pas été supprimée!");
-                                            }
-                                        });
-                                }
-                                
-                        
-                            });
-                        });
-                    </script>
-                    </tbody>
-                </table>
+    });
+});
+</script>-->
     </body>
 
 </html>

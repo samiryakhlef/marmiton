@@ -83,15 +83,14 @@ $db->Connect();
             </div>
         </div>
     </nav>
-
     <h1 class="text-center my-3">Modifier la recette</h1>
-                <!--formulaire de modification-->
-                <form id="UpdateForm" method="POST" class="col-md-5 col-lg-8 col-xl-6 mx-auto rounded" style ="border:1px solid black;">
+    <!--formulaire de modification-->
+    <form method="POST" class="col-md-5 col-lg-8 col-xl-6 mx-auto rounded" style ="border:1px solid black;">
                     <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
                             <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette" value="<?php echo $recette['name'];?>">
-                            <textarea type="text" name="description" class="p-2 m-2 " placeholder="description de la recette" value="<?php  echo $recette['description'];?>"></textarea>
-                            <textarea type="text" name="ingredients" class="p-2 m-2 " placeholder="Entrer la liste des ingrédients ( ! Séparé d'une virgule ! )" value="<?php  echo $recette['ingredients'];?>"></textarea>
-                            <input type="time" name="temps" class="p-2 m-2 " placeholder="Temps de préparation" value="<?php echo  $recette['temps'];?>">
+                            <textarea  name="description" class="p-2 m-2 " placeholder="description de la recette" value=""><?php  echo $recette['description'];?></textarea>
+                            <textarea  name="ingredients" class="p-2 m-2 " placeholder="Entrer la liste des ingrédients ( ! Séparé d'une virgule ! )" value=""><?php  echo $recette['ingredients'];?></textarea>
+                            <input type="text" name="temps" class="p-2 m-2 " placeholder="Temps de préparation" value="<?php echo  $recette['temps'];?>">
                                 
                                 <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté" value="<?php  echo $recette['difficulty'];?>">
                                     <option>Difficulté de la recette</option>
@@ -107,52 +106,53 @@ $db->Connect();
                                     <option value="desserts"<?php if ($recette['type'] == 'desserts') { echo 'selected'; } ?>>Désserts</option>
                                 </select>
 
-                        <div class="mb-3">
-                            <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                            <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
-                        </div>
+            <div class="mb-3">
+                <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
+                <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
+            </div>
 
-                        <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                            <button type="submit" class="btn btn-outline-warning rounded-pill  " value="envoyer">Modifier votre recette</button>
-                        </div>
-                    </div>
-                </form>
+            <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
+                <button type="submit" class="btn btn-outline-warning rounded-pill  " value="envoyer">Modifier votre recette</button>
             </div>
         </div>
-        </div>
-        <script>
-    $(document).ready(function(){
-        $("#UpdateForm").submit(function(e){
-            e.preventDefault();
-            var name = $("input[name=name]").val();
-            var description = $("input[name=description]").val();
-            var ingredients = $("input[name=ingredients]").val();
-            var temps = $("input[name=temps]").val();
-            var difficulty = $("select[name=difficulty]").val();
-            var type = $("select[name=type]").val();
-            if (name == "" || description == "" || ingredients == "" || temps == "" || difficulty == "" || type == "") {
-                swal("Oups!", "Vous n'avez pas rempli tous les champs", "error");
-            } else {
-                $.ajax({
-                    url: "?page=add_ingredients",
-                    method: "POST",
-                    data: {
-                        name: name,
-                        description: description,
-                        ingredients: ingredients,
-                        temps: temps,
-                        difficulty: difficulty,
-                        type: type
-                    },
-                    dataType: "html",
-                    success: function(data){
-                        console.log(data);
-                        swal("Bravo!", "Votre recette a bien été modifié", "success");
-                    }
-                });
+    </form>
+    </div>
+    </div>
+    </div>
+    <!-- <script>
+        $(document).ready(function() {
+            $("#UpdateForm").submit(function(e) {
+                e.preventDefault();
+                var name = $("input[name=name]").val();
+                var description = $("input[name=description]").val();
+                var ingredients = $("input[name=ingredients]").val();
+                var temps = $("input[name=temps]").val();
+                var difficulty = $("select[name=difficulty]").val();
+                var type = $("select[name=type]").val();
+                if (name == "" || description == "" || ingredients == "" || temps == "" || difficulty == "" || type == "") {
+                    swal("Oups!", "Vous n'avez pas rempli tous les champs", "error");
+                } else {
+                    $.ajax({
+                        url: "?page=add_ingredients",
+                        method: "POST",
+                        data: {
+                            name: name,
+                            description: description,
+                            ingredients: ingredients,
+                            temps: temps,
+                            difficulty: difficulty,
+                            type: type
+                        },
+                        dataType: "html",
+                        success: function(data) {
+                            console.log(data);
+                            swal("Bravo!", "Votre recette a bien été modifié", "success");
+                        }
+                    });
                 }
             });
         });
-</script>
+    </script>-->
 </body>
+
 </html>
