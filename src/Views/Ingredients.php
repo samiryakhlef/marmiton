@@ -100,13 +100,13 @@ use App\Controller\IngredientsController;
                     <label for="temps"><strong>Temps de préparation de la recette</strong> </label>
                     <input type="text" class="form-control" id="temps" name="temps" placeholder="Durée de la recette" value="" required>
                 </div>
-                <select type="text" name="difficulty" id="difficulty" class=" m-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" value="" placeholder="dificulté">
+                <select type="text" name="difficulty" id="difficulty" class=" m-2 p-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" value="" placeholder="dificulté">
                     <option>Difficulté de la recette</option>
                     <option value="facile">Facile</option>
                     <option value="moyen">Moyen</option>
                     <option value="dur">Dur</option>
                 </select>
-                <select type="text" name="type" id="type" class=" m-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" value="" placeholder="dificulté">
+                <select type="text" name="type" id="type" class=" m-2 p-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" value="" placeholder="dificulté">
                     <option>Type de Recette</option>
                     <option value="entrer">Entrées</option>
                     <option value="plats">Plats</option>
@@ -115,8 +115,8 @@ use App\Controller\IngredientsController;
                 <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
                     <label for="image_name" class="form-label rounde-pill "> <strong>Ajouter une photo</strong>
                         <input id="image_name" name="image_name" class="form-control form-control-sm my-3" value="" type="file" name="Image" accept="image/png, image/jpeg">
-                        <button name="uploads" type="submit" class="btn btn-outline-secondary rounded bg-success  text-dark bg-opacity-75  ">Ajouter votre recette</button>
                     </label>
+                    <button name="uploads" type="submit" class="btn btn-outline-secondary rounded bg-success  text-dark bg-opacity-75  ">Ajouter votre recette</button>
                 </div>
             </section>
 
@@ -169,7 +169,7 @@ use App\Controller\IngredientsController;
                     <use xlink:href="#bootstrap"></use>
                 </svg>
             </a>
-            <span class="mb-3 mb-md-0 text-muted text-center"><strong>© Samir Yakhlef</strong></span>
+            <p class="text-white">Copyright &copy; 2022 - All rights reserved to Samir Yakhlef</p>
         </div>
 
         <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
