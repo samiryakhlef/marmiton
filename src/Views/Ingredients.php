@@ -68,52 +68,58 @@ use App\Controller\IngredientsController;
             <i class="bi bi-stars" style="color:gold"></i>
         </div>
     </legend>
-    <div class="container col-xl-6 mx-auto p-4 p-sm-2  Regular shadow" style="--bs-bg-opacity: .7;background-color:rgb(237, 107, 94);">
 
 
-        <!-------------------------vérification des champs du formulaire------------------------>
+    <!-------------------------vérification des champs du formulaire------------------------>
 
-        <form class="form-control" method="post" action="?page=ingredients" enctype="multipart/form-data">
-            <div class=" d-flex flex-column mb-3 p-4 p-sm-2 " style=" --bs-bg-opacity: .7;">
-                <div class="form-group">
-                    <label for="name">Nom de la recette</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Nom de la recette" value="" required>
+    <div class="container">
+        <form class=" d-flex " method="post" action="?page=ingredients" enctype="multipart/form-data">
+            <section class=" form-control d-flex flex-column">
+                <div class="mb-3 p-4 p-sm-2 " style=" --bs-bg-opacity: .7;">
+                    <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 ">
+                        <label for="name"><strong>Nom de la recette</strong></label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Entrer le titre de la recette" value="" required>
+                    </div>
+                    <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 my-2">
+                        <label for="description"><strong>Description de la recette</strong></label>
+                        <textarea class="form-control" id="description" name="description" rows="6" placeholder="Décriver brièvement votre recette" value="" required></textarea>
+                    </div>
+                    <div class="form-group text-center rounded bg-danger  text-dark bg-opacity-25  my-2">
+                        <label for="ingredients"><strong c>Ingrédients</strong></label>
+                        <textarea class="form-control" id="ingredients" name="ingredients" rows="6" placeholder="Lister les ingrédients en terminant par un point" value="" required></textarea>
+                    </div>
+            </section>
+
+            <section class="form-control d-flex flex-column">
+
+                <div class="form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2">
+                    <label for="steps"><strong> Préparation</strong></label>
+                    <textarea class="form-control" rows="5" id="steps" name="steps" placeholder="Entrer chaque étapes de la recettes suivie par une virgule" value="" required></textarea>
                 </div>
-                <div class="form-group">
-                    <label for="description">Description de la recette</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description de la recette" value="" required></textarea>
+                <div class="form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2">
+                    <label for="temps"><strong>Temps de préparation de la recette</strong> </label>
+                    <input type="text" class="form-control" id="temps" name="temps" placeholder="Durée de la recette" value="" required>
                 </div>
-                <div class="form-group">
-                    <label for="ingredients">Ingrédients</label>
-                    <textarea class="form-control" id="ingredients" name="ingredients" rows="3" placeholder="Ingrédients" value="" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="steps">Préparation</label>
-                    <textarea class="form-control" id="steps" name="steps" rows="3" placeholder="Préparation" value="" required></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="temps">Temps de préparation de la recette</label>
-                    <input type="text" class="form-control" id="temps" name="temps" placeholder="Nom de la recette" value="" required>
-                </div>
-                <select type="text" name="difficulty" id="difficulty" class="p-2 m-2 " value="" placeholder="dificulté">
+                <select type="text" name="difficulty" id="difficulty" class=" m-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" value="" placeholder="dificulté">
                     <option>Difficulté de la recette</option>
                     <option value="facile">Facile</option>
                     <option value="moyen">Moyen</option>
                     <option value="dur">Dur</option>
                 </select>
-                <select type="text" name="type" id="type" class="p-2 m-2 " value="" placeholder="dificulté">
+                <select type="text" name="type" id="type" class=" m-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" value="" placeholder="dificulté">
                     <option>Type de Recette</option>
                     <option value="entrer">Entrées</option>
                     <option value="plats">Plats</option>
                     <option value="desserts">Désserts</option>
                 </select>
                 <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                    <label for="image_name" class="form-label rounde-pill ">
+                    <label for="image_name" class="form-label rounde-pill "> <strong>Ajouter une photo</strong>
                         <input id="image_name" name="image_name" class="form-control form-control-sm my-3" value="" type="file" name="Image" accept="image/png, image/jpeg">
-                        <button name="uploads" type="submit" class="btn btn-outline-secondary  ">Ajouter votre recette</button>
+                        <button name="uploads" type="submit" class="btn btn-outline-secondary rounded bg-success  text-dark bg-opacity-75  ">Ajouter votre recette</button>
                     </label>
                 </div>
-            </div>
+            </section>
+
         </form>
     </div>
     <script>
@@ -156,6 +162,28 @@ use App\Controller\IngredientsController;
             });
         });
 </script>-->
+    <footer class="d-flex flex-wrap justify-content-between align-items-center bg-dark py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                <svg class="bi" width="30" height="24">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <span class="mb-3 mb-md-0 text-muted text-center"><strong>© Samir Yakhlef</strong></span>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#twitter"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#instagram"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#facebook"></use>
+                    </svg></a></li>
+        </ul>
+    </footer>
 </body>
 
 </html>
