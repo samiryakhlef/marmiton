@@ -32,7 +32,6 @@ $db->Connect();
 
 <body>
     <header>
-
         <!------------------------------------------- navbar --------------------------------------------->
         <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="barre de navigation">
             <div class="container-fluid">
@@ -88,52 +87,112 @@ $db->Connect();
     </header>
 
     <h1 class="text-center my-3">Modifier la recette</h1>
-    <!--formulaire de modification-->
-    <form method="post" class="col-md-5 col-lg-8 col-xl-6 mx-auto rounded" style="border:1px solid black;">
-        <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
-            <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette" value="<?php echo $recette['name']; ?>">
-            <textarea name="description" class="p-2 m-2 " placeholder="description de la recette" value=""><?php echo $recette['description']; ?></textarea>
-            <textarea name="ingredients" class="p-2 m-2 " placeholder="Entrer la liste des ingrédients ( ! Séparé d'une virgule ! )" value=""><?php echo $recette['ingredients']; ?></textarea>
-            <textarea name="steps" class="p-2 m-2 " placeholder="Entrer les etapes de la recettes ( ! Séparé d'une virgule ! )" value=""><?php echo $recette['steps']; ?></textarea>
-            <input type="text" name="temps" class="p-2 m-2 " placeholder="Temps de préparation" value="<?php echo  $recette['temps']; ?>">
 
-            <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté" value="<?php echo $recette['difficulty']; ?>">
-                <option>Difficulté de la recette</option>
-                <option value="facile" <?php if ($recette['difficulty'] == 'facile') {
-                                            echo 'selected';
-                                        } ?>>Facile</option>
-                <option value="moyen" <?php if ($recette['difficulty'] == 'moyen') {
-                                            echo 'selected';
-                                        } ?>>Moyen</option>
-                <option value="dur" <?php if ($recette['difficulty'] == 'dur') {
-                                        echo 'selected';
-                                    } ?>>Dur</option>
-            </select>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <!--============ START-FORM ==================-->
+                <form method="post" class="d-flex rounded" style="border:1px solid black;">
 
-            <select type="text" name="type" class="p-2 m-2 " placeholder="dificulté" value="<?php echo $recette['type']; ?>">
-                <option>Type de Recette</option>
-                <option value="entrer" <?php if ($recette['type'] == 'entrer') {
-                                            echo 'selected';
-                                        } ?>>Entrées</option>
-                <option value="plats" <?php if ($recette['type'] == 'plats') {
-                                            echo 'selected';
-                                        } ?>>Plats</option>
-                <option value="desserts" <?php if ($recette['type'] == 'desserts') {
-                                                echo 'selected';
-                                            } ?>>Désserts</option>
-            </select>
+                    <section class="form-control d-flex flex-column">
+                        <!-----------------------NAME-------------------------->
+                        <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 my-2">
+                            <label for="nom"><strong>Nom de la recette</strong></label>
+                            <input type="text" class="form-control" id="name" name="name" placeholder="Entrer le nom de la recette" value="<?php echo $recette['name']; ?>">
+                        </div>
+                        <!-----------------------DESCRIPTION-------------------------->
+                        <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 my-2">
+                            <label for="description"><strong>Description</strong></label>
+                            <textarea class="form-control" id="description" name="description" rows="6" placeholder="Décriver brièvement votre recette"><?php echo $recette['description']; ?></textarea>
+                        </div>
+                        <!-----------------------INGREDIENTS-------------------------->
+                        <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 my-2">
+                            <label for="ingredients"><strong>Ingrédients</strong></label>
+                            <textarea class="form-control" id="ingredients" name="ingredients" placeholder="Lister les ingrédients en terminant par un point" rows="6"><?php echo $recette['ingredients']; ?></textarea>
+                        </div>
+                    </section>
 
-            <div class="mb-3">
-                <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                <input name="" class="form-control form-control-sm" id="formFileSm" type="file" value="<?php echo $recette['image_name'] ?>">
-            </div>
+                    <section class="form-control d-flex flex-column">
+                        <!-----------------------PREPARATION-------------------------->
+                        <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 my-2">
+                            <label for="steps"><strong>Préparation</label>
+                            <textarea class="form-control" id="steps" name="steps" rows="6" placeholder="Entrer chaque étapes de la recettes suivie par une virgule"><?php echo $recette['steps']; ?></textarea>
+                        </div>
+                        <!-----------------------TEMPS-------------------------->
+                        <div class="form-group text-center rounded bg-danger text-dark bg-opacity-25 my-2">
+                            <label for="temps"><strong>Temps de préparation</strong></label>
+                            <input type="text" class="form-control" id="temps" name="temps" placeholder="Entrer le temps de préparation" value="<?php echo $recette['temps']; ?>">
+                        </div>
+                        <!-----------------------DIFFICULTY-------------------------->
 
-            <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                <button type="submit" class="btn btn-outline-warning rounded-pill" value="envoyer">Modifier votre recette</button>
+                        <select type="text" name="difficulty" class=" p-2 m-2 form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" placeholder="dificulté" value="<?php echo $recette['difficulty']; ?>">
+                            <option>Difficulté de la recette</option>
+                            <option value="facile" <?php if ($recette['difficulty'] == 'facile') {
+                                                        echo 'selected';
+                                                    } ?>>Facile</option>
+                            <option value="moyen" <?php if ($recette['difficulty'] == 'moyen') {
+                                                        echo 'selected';
+                                                    } ?>>Moyen</option>
+                            <option value="dur" <?php if ($recette['difficulty'] == 'dur') {
+                                                    echo 'selected';
+                                                } ?>>Dur</option>
+                        </select>
+
+                        <!-----------------------TYPE-------------------------->
+
+                        <select type="text" name="type" class="m-2 p-2  form-group text-center rounded bg-danger  text-dark bg-opacity-25  mx-5 my-2" placeholder="dificulté" value="<?php echo $recette['type']; ?>">
+                            <option>Type de Recette</option>
+                            <option value="entrer" <?php if ($recette['type'] == 'entrer') {
+                                                        echo 'selected';
+                                                    } ?>>Entrées</option>
+                            <option value="plats" <?php if ($recette['type'] == 'plats') {
+                                                        echo 'selected';
+                                                    } ?>>Plats</option>
+                            <option value="desserts" <?php if ($recette['type'] == 'desserts') {
+                                                            echo 'selected';
+                                                        } ?>>Désserts</option>
+                        </select>
+
+                        <!-----------------------IMAGE-------------------------->
+                        <div class="mb-3">
+                            <label for="formFileSm" class="form-label rounde-pill"><strong>Ajouter une photo</strong></label>
+                            <input name="" class="form-control-sm mx-4 my-3" id="formFileSm" type="file" value="<?php echo $recette['image_name'] ?>">
+                        </div>
+
+                        <!-----------------------BUTTON-------------------------->
+                        <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
+                            <button type="submit" class="btn btn-warning" value="envoyer">Modifier votre recette</button>
+                        </div>
+                    </section>
+                </form>
+                <!--============ END-FORM ==================-->
             </div>
         </div>
-    </form>
-    
+    </div>
+
+        <footer class="d-flex flex-wrap justify-content-between align-items-center bg-dark py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                <svg class="bi" width="30" height="24">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <p class="text-white">Copyright &copy; 2022 - All rights reserved to Samir Yakhlef</p>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#twitter"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#instagram"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#facebook"></use>
+                    </svg></a></li>
+        </ul>
+    </footer>
+
     <!-- <script>
         $(document).ready(function() {
             $("#UpdateForm").submit(function(e) {
