@@ -99,7 +99,15 @@ class ModelAccueil
     public function updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $imageName)
 
     {
-        $ql = 'UPDATE ' . self::TABLE_NAME . ' SET name = :name, description = :description, ingredients = :ingredients, steps = :steps, difficulty = :difficulty, type = :type, imageName = :image_name WHERE id = :id';
+        $ql = "UPDATE " . self::TABLE_NAME . " 
+        SET name = :name, 
+            description = :description, 
+            ingredients = :ingredients, 
+            steps = :steps, 
+            difficulty = :difficulty, 
+            type = :type, 
+            image_name = :image_name
+        WHERE id = :id";
         $query = $this->pdo->prepare($ql);
         $query->bindValue(':name', $name, PDO::PARAM_STR);
         $query->bindValue(':description', $description, PDO::PARAM_STR);
@@ -109,7 +117,8 @@ class ModelAccueil
         $query->bindValue(':type', $type, PDO::PARAM_STR);
         $query->bindValue(':image_name', $imageName, PDO::PARAM_STR);
         $query->bindValue(':id', $id, PDO::PARAM_INT);
-        $query->execute();
+        $result = $query->execute();
+        return $result;
     }
 
     // je créer une fonction delete qui prend en paramètre l'id de la recette à supprimer
@@ -261,7 +270,7 @@ class ModelAccueil
     }
 
     /**
-     * Get the value of ingredient
+     * Get the value of ingredients
      */
     public function getIngredients()
     {
@@ -269,7 +278,7 @@ class ModelAccueil
     }
 
     /**
-     * Set the value of ingredient
+     * Set the value of ingredients
      *
      * @return  self
      */
@@ -376,6 +385,26 @@ class ModelAccueil
     public function setSteps($steps)
     {
         $this->steps = $steps;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of imageName
+     */
+    public function getimageName()
+    {
+        return $this->imageName;
+    }
+
+    /**
+     * Set the value of imageName
+     *
+     * @return  self
+     */
+    public function setimageName($imageName)
+    {
+        $this->imageName = $imageName;
 
         return $this;
     }
