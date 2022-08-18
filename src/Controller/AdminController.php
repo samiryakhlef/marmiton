@@ -83,24 +83,20 @@ class AdminController extends AbstractController
             $id = strip_tags($_GET['id']);
             $recette = $ModelAccueil->editRecette($id);
         }
-
-        if (isset($_GET['id']) && !empty($_GET['id']) && isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['description']) && !empty($_POST['description']) && isset($_POST['ingredients']) && !empty($_POST['ingredients']) && isset($_POST['steps']) && !empty($_POST['steps']) && isset($_POST['difficulty']) && !empty($_POST['difficulty']) && isset($_POST['type']) && !empty($_POST['type']) && isset($_POST['temps']) && !empty($_POST['temps']) && isset($_POST['imageName']) && !empty($_POST['imageName'])) {
-            
-            $id = $_GET['id'];
-            $name = $_POST['name'];
-            $description = $_POST['description'];
-            $ingredients = $_POST['ingredients'];
-            $difficulty = $_POST['difficulty'];
-            $type = $_POST['type'];
-            $temps = $_POST['temps'];
-            $steps = $_POST['steps'];
-            $imageName = $_POST['imageName'];
-
-            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $imageName, $difficulty, $type, $temps);
-            
-            header('Location: http://localhost/marmiton/index.php?page=admin');
+    
+        if(isset($_POST['name']) && !empty($_POST['name'])){
+            $name = strip_tags($_POST['name']);
+            $description = strip_tags($_POST['description']);
+            $ingredients = strip_tags($_POST['ingredients']);
+            $steps = strip_tags($_POST['steps']);
+            $difficulty = strip_tags($_POST['difficulty']);
+            $type = strip_tags($_POST['type']);
+            $imageName =($_POST['image_name'] ?? null);
+            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $imageName);
+            header('Location: index.php?page=admin');
             exit;
         }
+        
         $this->render('Update.php', [
             'recette' => $recette
         ]);
