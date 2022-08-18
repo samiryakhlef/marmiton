@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Database\Recette;
 use App\Controller\AbstractController;
+use App\Model\ModelAccueil;
 
 class IngredientsController extends AbstractController
 {
@@ -22,15 +23,16 @@ class IngredientsController extends AbstractController
             $ingredients = htmlentities(trim($_POST['ingredients']));
             $difficulty = htmlentities(trim($_POST['difficulty']));
             $type = htmlentities(trim($_POST['type']));
-            $steps = htmlentities(trim($_POST['steps']));
             $temps = htmlentities(trim($_POST['temps']));
+            $steps = htmlentities(trim($_POST['steps']));
+            $imageName = ($_POST['image_name']) ?? null;
 
             if (
-                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps) && !empty($steps)
+                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps)
             ) {
 
-                $recette = new Recette();
-                $recette->addRecette($name, $description, $ingredients, $difficulty,$steps , $type, $temps);
+                $recette = new ModelAccueil();
+                $recette->addRecette($name, $description, $ingredients, $difficulty, $type, $temps,$steps, $imageName);
             }
         }
         $this->render('Ingredients.php');
@@ -42,18 +44,18 @@ class IngredientsController extends AbstractController
             $ingredients = strip_tags($_POST['ingredients']);
             $name = htmlentities(trim($_POST['name']));
             $description = htmlentities(trim($_POST['description']));
-            $ingredients = htmlentities(trim($_POST['ingredients']));
-            $steps = htmlentities(trim($_POST['steps']));
             $difficulty = htmlentities(trim($_POST['difficulty']));
             $type = htmlentities(trim($_POST['type']));
             $temps = htmlentities(trim($_POST['temps']));
+            $steps = htmlentities(trim($_POST['steps']));
+            $imageName = ($_POST['image_name']) ?? null;
 
             if (
-                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps) && !empty($steps)
+                !empty($name) && !empty($description) && !empty($ingredients) && !empty($difficulty) && !empty($type) && !empty($temps)
             ) {
 
-                $recette = new Recette();
-                $recette->addRecette($name, $description, $ingredients, $difficulty,$steps , $type, $temps);
+                $recette = new ModelAccueil();
+                $recette->addRecette($name, $description, $ingredients, $difficulty, $type, $temps,$steps, $imageName);
                 $this->sendJson(['success' => true]);
             }
 

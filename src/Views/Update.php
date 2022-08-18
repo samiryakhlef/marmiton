@@ -108,7 +108,7 @@ $db->Connect();
 
             <div class="mb-3">
                 <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                <input name="" class="form-control form-control-sm" id="formFileSm" type="file">
+                <input name="" class="form-control form-control-sm" id="formFileSm" type="file" value="<?php echo $imageName['image_name'] ?>">
             </div>
 
             <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">

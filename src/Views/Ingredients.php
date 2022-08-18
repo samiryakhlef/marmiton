@@ -19,7 +19,8 @@ use App\Controller\IngredientsController;
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.9.1/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.5/dist/umd/popper.min.js" integrity="sha384-Xe+8cL9oJa6tN/veChSP7q+mnSPaj5Bcu9mPX5F5xIGE0DVittaqT5lorf0EI7Vk" crossorigin="anonymous" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous" defer></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js" defer></script>
 
     <title>Ajouter une recette</title>
 </head>
@@ -55,7 +56,7 @@ use App\Controller\IngredientsController;
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="?page=ingredients">Ajouter une recette</a>
                     </li>
-                </ul> 
+                </ul>
             </div>
         </div>
     </nav>
@@ -72,31 +73,45 @@ use App\Controller\IngredientsController;
 
         <!-------------------------vérification des champs du formulaire------------------------>
 
-        <form id="ingredientsForm" method="post" class="form-control" enctype="multipart/form-data" >
-            <div class="d-flex flex-column mb-3 p-4 p-sm-2 " style="--bs-bg-opacity: .7;">
-                <input type="text" name="name" class="p-2 m-2 " placeholder="nom de la recette">
-                <textarea type="text" name="description" class="p-2 m-2 " placeholder="description de la recette"></textarea>
-                <textarea type="text" name="ingredients" class="p-2 m-2 " placeholder="ingredients"></textarea>
-                <textarea type="text" name="steps" class="p-2 m-2 " placeholder="etape de la recette"></textarea>
-                <input type="time" name="temps" class="p-2 m-2 " placeholder="Temps de préparation">
-                <select type="text" name="difficulty" class="p-2 m-2 " placeholder="dificulté">
+        <form class="form-control" method="post" action="?page=ingredients" enctype="multipart/form-data">
+            <div class=" d-flex flex-column mb-3 p-4 p-sm-2 " style=" --bs-bg-opacity: .7;">
+                <div class="form-group">
+                    <label for="name">Nom de la recette</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Nom de la recette" value="" required>
+                </div>
+                <div class="form-group">
+                    <label for="description">Description de la recette</label>
+                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Description de la recette" value="" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="ingredients">Ingrédients</label>
+                    <textarea class="form-control" id="ingredients" name="ingredients" rows="3" placeholder="Ingrédients" value="" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="steps">Préparation</label>
+                    <textarea class="form-control" id="steps" name="steps" rows="3" placeholder="Préparation" value="" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="temps">Temps de préparation de la recette</label>
+                    <input type="text" class="form-control" id="temps" name="temps" placeholder="Nom de la recette" value="" required>
+                </div>
+                <select type="text" name="difficulty" id="difficulty" class="p-2 m-2 " value="" placeholder="dificulté">
                     <option>Difficulté de la recette</option>
                     <option value="facile">Facile</option>
                     <option value="moyen">Moyen</option>
                     <option value="dur">Dur</option>
                 </select>
-                <select type="text" name="type" class="p-2 m-2 " placeholder="dificulté">
+                <select type="text" name="type" id="type" class="p-2 m-2 " value="" placeholder="dificulté">
                     <option>Type de Recette</option>
                     <option value="entrer">Entrées</option>
                     <option value="plats">Plats</option>
                     <option value="desserts">Désserts</option>
                 </select>
-                <div class="mb-3">
-                    <label for="formFileSm" class="form-label rounde-pill">Ajouter une photo</label>
-                    <input name="file" class="form-control form-control-sm" id="formFileSm" type="file">
-                </div>
                 <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                    <button type="submit" class="btn btn-outline-secondary  " value="envoyer">Ajouter votre recette</button>
+                    <label for="image_name" class="form-label rounde-pill ">
+                        <input id="image_name" name="image_name" class="form-control form-control-sm my-3" value="" type="file" name="Image" accept="image/png, image/jpeg">
+                        <button name="uploads" type="submit" class="btn btn-outline-secondary  ">Ajouter votre recette</button>
+                    </label>
                 </div>
             </div>
         </form>
@@ -105,9 +120,9 @@ use App\Controller\IngredientsController;
         "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
     </script>
 
-<!-- function sweet alert pour le formulaire d'ajout de recette-->
+    <!-- function sweet alert pour le formulaire d'ajout de recette-->
 
-<!--<script>
+    <!--<script>
     $(document).ready(function(){
         $("#ingredientsForm").submit(function(e){
             

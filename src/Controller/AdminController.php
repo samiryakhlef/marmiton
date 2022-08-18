@@ -84,7 +84,7 @@ class AdminController extends AbstractController
             $recette = $ModelAccueil->editRecette($id);
         }
 
-        if (isset($_GET['id']) && !empty($_GET['id']) && isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['description']) && !empty($_POST['description']) && isset($_POST['ingredients']) && !empty($_POST['ingredients']) && isset($_POST['steps']) && !empty($_POST['steps']) && isset($_POST['difficulty']) && !empty($_POST['difficulty']) && isset($_POST['type']) && !empty($_POST['type'])) {
+        if (isset($_GET['id']) && !empty($_GET['id']) && isset($_POST['name']) && !empty($_POST['name']) && isset($_POST['description']) && !empty($_POST['description']) && isset($_POST['ingredients']) && !empty($_POST['ingredients']) && isset($_POST['steps']) && !empty($_POST['steps']) && isset($_POST['difficulty']) && !empty($_POST['difficulty']) && isset($_POST['type']) && !empty($_POST['type']) && isset($_POST['temps']) && !empty($_POST['temps']) && isset($_POST['imageName']) && !empty($_POST['imageName'])) {
             
             $id = $_GET['id'];
             $name = $_POST['name'];
@@ -94,8 +94,9 @@ class AdminController extends AbstractController
             $type = $_POST['type'];
             $temps = $_POST['temps'];
             $steps = $_POST['steps'];
+            $imageName = $_POST['imageName'];
 
-            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $temps);
+            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $imageName, $difficulty, $type, $temps);
             
             header('Location: http://localhost/marmiton/index.php?page=admin');
             exit;

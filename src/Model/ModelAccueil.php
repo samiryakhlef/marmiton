@@ -15,6 +15,8 @@ class ModelAccueil
     public $steps;
     public $difficulty;
     public $type;
+    public $temps;
+    public $imageName;
     public $created_at;
     public const TABLE_NAME = 'entrees';
 
@@ -38,15 +40,54 @@ class ModelAccueil
         return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    //je créer une fonction pour ajouter une recette en base de données
+    public function addRecette($name, $description, $ingredients, $difficulty, $type, $temps, $steps, $imageName)
+    {
+        $statement = $this->pdo->prepare('INSERT INTO `entrees` 
+        (`name`, 
+        `description`, 
+        `ingredients`, 
+        `steps`,
+        `difficulty`,
+        `type`, 
+        `temps`,
+        `image_name`) VALUES 
+        (:name, :description, :ingredients, :steps, :difficulty, :type, :temps, :image_name)');
+
+        $statement->bindValue(':name', $name, PDO::PARAM_STR);
+        $statement->bindValue(':description', $description, PDO::PARAM_STR);
+        $statement->bindValue(':ingredients', $ingredients, PDO::PARAM_STR);
+        $statement->bindValue(':steps', $steps, PDO::PARAM_STR);
+        $statement->bindValue(':temps', $temps, PDO::PARAM_STR);
+        $statement->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
+        $statement->bindValue(':type', $type, PDO::PARAM_STR);
+        $statement->bindValue(':image_name', $imageName, PDO::PARAM_STR);
+        $statement->execute();
+        return $statement;
+    }
+
+
     // je récupère par ma BBD par ID
     public function findById($id)
     {
-        $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = '.$id;
+        $sql = 'SELECT 
+        `id`,
+        `name`,
+        `description`,
+        `ingredients`,
+        `steps`,
+        `difficulty`,
+        `type`,
+        `temps`,
+        `image_name`,
+        `created_at`
+
+        FROM ' . self::TABLE_NAME . ' WHERE id = ' . $id;
         $query = $this->pdo->prepare($sql);
         $result = $query->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
     }
-    
+
     public function editRecette($id)
     {
         $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' WHERE id = ?';
@@ -55,10 +96,10 @@ class ModelAccueil
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type)
+    public function updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $imageName)
 
     {
-        $ql = 'UPDATE ' . self::TABLE_NAME . ' SET name = :name, description = :description, ingredients = :ingredients, steps = :steps, difficulty = :difficulty, type = :type WHERE id = :id';
+        $ql = 'UPDATE ' . self::TABLE_NAME . ' SET name = :name, description = :description, ingredients = :ingredients, steps = :steps, difficulty = :difficulty, type = :type, imageName = :image_name WHERE id = :id';
         $query = $this->pdo->prepare($ql);
         $query->bindValue(':name', $name, PDO::PARAM_STR);
         $query->bindValue(':description', $description, PDO::PARAM_STR);
@@ -66,6 +107,7 @@ class ModelAccueil
         $query->bindValue(':steps', $steps, PDO::PARAM_STR);
         $query->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
         $query->bindValue(':type', $type, PDO::PARAM_STR);
+        $query->bindValue(':image_name', $imageName, PDO::PARAM_STR);
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $query->execute();
     }
@@ -80,10 +122,10 @@ class ModelAccueil
         return $query;
     }
 
-    
+
 
     //je créer un fonction pour compter les pages courantes 
-    public function findByPage($page, $order, $research,$type)
+    public function findByPage($page, $order, $research, $type)
     {   // On détermine le nombre d'articles par page
         $parPage = 10;
 
@@ -94,12 +136,14 @@ class ModelAccueil
         } else {
             $order = 'ASC';
         }
-        
-        if($type == 1){
+
+        if ($type == 1) {
             $type = 'entrer';
-        }if($type == 2){
+        }
+        if ($type == 2) {
             $type = 'plats';
-        }if($type == 3){
+        }
+        if ($type == 3) {
             $type = 'desserts';
         }
 
@@ -107,11 +151,11 @@ class ModelAccueil
             $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' 
             WHERE type LIKE "%' . $research . '%" OR name LIKE "%' . $research . '%" OR ingredients LIKE "%' . $research . '%"
             ORDER BY `id` ' . $order;
-        }elseif ($type != null) {
+        } elseif ($type != null) {
             $sql = 'SELECT * FROM ' . self::TABLE_NAME . ' 
             WHERE type LIKE "%' . $type . '%"
             ORDER BY `id` ' . $order;
-        }else {
+        } else {
             $sql = 'SELECT
                 `id`
                 ,`name`
@@ -126,7 +170,7 @@ class ModelAccueil
                 ORDER BY `id` ' . $order . '
                 LIMIT ' . $pageDebut . ',' . $parPage;
         }
-    
+
         $pdoStatement = $this->pdo->query($sql);
         $result = $pdoStatement->fetchAll(PDO::FETCH_CLASS, self::class);
         return $result;
@@ -198,7 +242,7 @@ class ModelAccueil
 
     /**
      * Get the value of description
-     */ 
+     */
     public function getDescription()
     {
         return $this->description;
@@ -208,7 +252,7 @@ class ModelAccueil
      * Set the value of description
      *
      * @return  self
-     */ 
+     */
     public function setDescription($description)
     {
         $this->description = $description;
@@ -218,7 +262,7 @@ class ModelAccueil
 
     /**
      * Get the value of ingredient
-     */ 
+     */
     public function getIngredients()
     {
         return $this->ingredients;
@@ -228,7 +272,7 @@ class ModelAccueil
      * Set the value of ingredient
      *
      * @return  self
-     */ 
+     */
     public function setIngredients($ingredients)
     {
         $this->ingredient = $ingredients;
@@ -238,7 +282,7 @@ class ModelAccueil
 
     /**
      * Get the value of difficulty
-     */ 
+     */
     public function getDifficulty()
     {
         return $this->difficulty;
@@ -248,7 +292,7 @@ class ModelAccueil
      * Set the value of difficulty
      *
      * @return  self
-     */ 
+     */
     public function setDifficulty($difficulty)
     {
         $this->difficulty = $difficulty;
@@ -258,7 +302,7 @@ class ModelAccueil
 
     /**
      * Get the value of temps
-     */ 
+     */
     public function getTemps()
     {
         return $this->temps;
@@ -268,7 +312,7 @@ class ModelAccueil
      * Set the value of temps
      *
      * @return  self
-     */ 
+     */
     public function setTemps($temps)
     {
         $this->temps = $temps;
@@ -278,7 +322,7 @@ class ModelAccueil
 
     /**
      * Get the value of type
-     */ 
+     */
     public function getType()
     {
         return $this->type;
@@ -288,7 +332,7 @@ class ModelAccueil
      * Set the value of type
      *
      * @return  self
-     */ 
+     */
     public function setType($type)
     {
         $this->type = $type;
@@ -298,7 +342,7 @@ class ModelAccueil
 
     /**
      * Get the value of created_at
-     */ 
+     */
     public function getCreated_at()
     {
         return $this->created_at;
@@ -308,7 +352,7 @@ class ModelAccueil
      * Set the value of created_at
      *
      * @return  self
-     */ 
+     */
     public function setCreated_at($created_at)
     {
         $this->created_at = $created_at;
@@ -318,7 +362,7 @@ class ModelAccueil
 
     /**
      * Get the value of steps
-     */ 
+     */
     public function getSteps()
     {
         return $this->steps;
@@ -328,7 +372,7 @@ class ModelAccueil
      * Set the value of steps
      *
      * @return  self
-     */ 
+     */
     public function setSteps($steps)
     {
         $this->steps = $steps;
