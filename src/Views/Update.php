@@ -156,7 +156,7 @@ $db->Connect();
                         <!-----------------------IMAGE-------------------------->
                         <div class="mb-3">
                             <label for="formFileSm" class="form-label rounde-pill"><strong>Ajouter une photo</strong></label>
-                            <input name="" class="form-control-sm mx-4 my-3" id="formFileSm" type="file" value="<?php echo $recette['image_name'] ?>">
+                            <input name="" class="form-control-sm mx-4 my-3" id="formFileSm" type="file" value="">
                         </div>
 
                         <!-----------------------BUTTON-------------------------->

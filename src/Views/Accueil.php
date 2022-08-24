@@ -101,15 +101,15 @@ $db->Connect();
         <?php foreach ($accueils as $accueil) : ?>
             <div class="card m-4 rounded" style="width: 20rem;">
                 <a href="?page=edit-recette&id=<?= $accueil->getId() ?>">
-                    <img src="https://picsum.photos/seed/picsum/200/300" class="card-img-top" alt="..." style="width: 100% ;height: 200px;">
+                    <img src="<?= $accueil->getImage() ?>" class="card-img-top" alt="..." style="width: 100% ;height: 200px;">
                 </a>
-                <!-- <div class="card-body">
+                <div class="card-body">
                     <h5 class="card-title text-center text-capitalize"><?= $accueil->getName() ?></h5>
                     <h6 class="card-title text-center text-uppercase"><?= $accueil->getType() ?></h6>
                         <p class="text-center"> <?= $accueil->getTemps() ?></p>
                         <p class="text-center"> <?= $accueil->getDescription() ?></p>
                         <p class="text-center"> <?= $accueil->getCreated_At() ?></p>
-                </div>-->
+                </div>
             </div>
             <?php endforeach; ?>
     </div>

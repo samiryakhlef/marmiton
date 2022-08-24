@@ -3,6 +3,7 @@
 namespace App\Model;
 
 use PDO;
+use Verot\Upload\upload;
 use App\Database\Database;
 
 
@@ -16,7 +17,7 @@ class ModelAccueil
     public $difficulty;
     public $type;
     public $temps;
-    public $imageName;
+    public $image;
     public $created_at;
     public const TABLE_NAME = 'entrees';
 
@@ -41,7 +42,7 @@ class ModelAccueil
     }
 
     //je créer une fonction pour ajouter une recette en base de données
-    public function addRecette($name, $description, $ingredients, $difficulty, $type, $temps, $steps, $imageName)
+    public function addRecette($name, $description, $ingredients, $difficulty, $type, $temps, $steps, $image)
     {
         $statement = $this->pdo->prepare('INSERT INTO `entrees` 
         (`name`, 
@@ -51,8 +52,8 @@ class ModelAccueil
         `difficulty`,
         `type`, 
         `temps`,
-        `image_name`) VALUES 
-        (:name, :description, :ingredients, :steps, :difficulty, :type, :temps, :image_name)');
+        `image`) VALUES 
+        (:name, :description, :ingredients, :steps, :difficulty, :type, :temps, :image)');
 
         $statement->bindValue(':name', $name, PDO::PARAM_STR);
         $statement->bindValue(':description', $description, PDO::PARAM_STR);
@@ -61,9 +62,14 @@ class ModelAccueil
         $statement->bindValue(':temps', $temps, PDO::PARAM_STR);
         $statement->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
         $statement->bindValue(':type', $type, PDO::PARAM_STR);
-        $statement->bindValue(':image_name', $imageName, PDO::PARAM_STR);
+        $statement->bindValue(':image', $image, PDO::PARAM_STR);
         $statement->execute();
         return $statement;
+    }
+    // je créer une fonction __toString() : la valeur de retour doit être de type chaîne, null
+    public function __toString()
+    {
+        return $this->image;
     }
 
 
@@ -79,7 +85,7 @@ class ModelAccueil
         `difficulty`,
         `type`,
         `temps`,
-        `image_name`,
+        `image`,
         `created_at`
 
         FROM ' . self::TABLE_NAME . ' WHERE id = ' . $id;
@@ -96,7 +102,7 @@ class ModelAccueil
         return $query->fetch(PDO::FETCH_ASSOC);
     }
 
-    public function updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $imageName)
+    public function updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $image)
 
     {
         $ql = "UPDATE " . self::TABLE_NAME . " 
@@ -106,7 +112,7 @@ class ModelAccueil
             steps = :steps, 
             difficulty = :difficulty, 
             type = :type, 
-            image_name = :image_name
+            image = :image
         WHERE id = :id";
         $query = $this->pdo->prepare($ql);
         $query->bindValue(':name', $name, PDO::PARAM_STR);
@@ -115,11 +121,13 @@ class ModelAccueil
         $query->bindValue(':steps', $steps, PDO::PARAM_STR);
         $query->bindValue(':difficulty', $difficulty, PDO::PARAM_STR);
         $query->bindValue(':type', $type, PDO::PARAM_STR);
-        $query->bindValue(':image_name', $imageName, PDO::PARAM_STR);
+        $query->bindValue(':image', $image, PDO::PARAM_STR);
         $query->bindValue(':id', $id, PDO::PARAM_INT);
         $result = $query->execute();
         return $result;
     }
+
+
 
     // je créer une fonction delete qui prend en paramètre l'id de la recette à supprimer
     public function delete($id)
@@ -174,6 +182,7 @@ class ModelAccueil
                 ,`temps`
                 ,`difficulty`
                 ,`type`
+                ,`image`
                 ,`created_at`
                 FROM ' . self::TABLE_NAME . '
                 ORDER BY `id` ' . $order . '
@@ -390,21 +399,21 @@ class ModelAccueil
     }
 
     /**
-     * Get the value of imageName
+     * Get the value of image
      */
-    public function getimageName()
+    public function getImage()
     {
-        return $this->imageName;
+        return $this->image;
     }
 
     /**
-     * Set the value of imageName
+     * Set the value of image
      *
      * @return  self
      */
-    public function setimageName($imageName)
+    public function setImage($image)
     {
-        $this->imageName = $imageName;
+        $this->image = $image;
 
         return $this;
     }

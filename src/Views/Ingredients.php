@@ -112,11 +112,12 @@ use App\Controller\IngredientsController;
                     <option value="plats">Plats</option>
                     <option value="desserts">Désserts</option>
                 </select>
+                <!--====================IMAGES UPLOADS==========================-->
                 <div class="form-group mb-3 text-center my-3 col-6 mx-auto ">
-                    <label for="image_name" class="form-label rounde-pill "> <strong>Ajouter une photo</strong>
-                        <input id="image_name" name="image_name" class="form-control form-control-sm my-3" value="" type="file" name="Image" accept="image/png, image/jpeg">
+                    <label for="image" class="form-label rounde-pill "> <strong>Ajouter une photo</strong>
+                        <input  name="image" class="form-control form-control-sm my-3" value="" type="file">
                     </label>
-                    <button name="uploads" type="submit" class="btn btn-outline-secondary rounded bg-success  text-dark bg-opacity-75  ">Ajouter votre recette</button>
+                    <button type="submit" name="submit" value="upload" class="btn btn-outline-secondary rounded bg-success  text-dark bg-opacity-75">Ajouter votre recette</button>
                 </div>
             </section>
 

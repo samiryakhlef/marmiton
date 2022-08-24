@@ -94,6 +94,7 @@ $db->Connect();
                             <th scope="col" class="table-dark">Difficulté</th>
                             <th scope="col" class="table-dark">Type</th>
                             <th scope="col" class="table-dark">Date de création</th>
+                            <th scope="col" class="table-dark">Image</th>
                             <th scope="col" class="table-dark">Supprimer</th>
                             <th scope="col" class="table-dark">Modifier</th>
                         </tr>
@@ -111,8 +112,9 @@ $db->Connect();
                                 <td class="table-danger"> <?= $accueil->getDifficulty() ?></td>
                                 <td class="table-secondary"> <?= $accueil->getType() ?></td>
                                 <td class="table-danger"> <?= $accueil->getCreated_at() ?></td>
-                                <td><a class="btn btn-outline-danger rounded-pill" href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></td>
-                                <td><a class="btn btn-outline-warning rounded-pill" href="?page=update_recette&id=<?= $accueil->getId() ?>">modifier</a></button></td>
+                                <td class="table-secondary"> <img src="<?= $accueil->getImage() ?>" alt="<?= $accueil->getName() ?>" width="100px" height="100px">Image</td>
+                                <td><a class="btn btn-danger rounded" href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></td>
+                                <td><a class="btn btn-warning rounded" href="?page=update_recette&id=<?= $accueil->getId() ?>">modifier</a></button></td>
                             </tr>
                         <?php endforeach; ?>
                     </tbody>
@@ -120,40 +122,28 @@ $db->Connect();
             </div>
         </div>
     </section>
-    <script>
-        "https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"
-    </script>
-    <!-- function sweet alert pour la suppression de la recette-->
-    <!--<script>
-$(document).ready(function() {
-    $('#deleteRecette').on('click', 'button', function() {
-        var id = $(this).closest('tr').find('td:first').text();
-        var url = '?page=delete_recette&id=' + id;
-    });
-    $.ajax({
-        url: 'index.php?page=admin',
-        type: 'GET',
+    <footer class="d-flex flex-wrap justify-content-between align-items-center bg-dark py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                <svg class="bi" width="30" height="24">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <p class="text-white">Copyright &copy; 2022 - All rights reserved to Samir Yakhlef</p>
+        </div>
 
-        success: function(data) {
-            swal({
-                title: "Voulez-vous vraiment supprimer cette recette ?",
-                text: "Cette action est irréversible!",
-                icon: "warning",
-                dangerMode: true,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        window.location.href = '?page=delete_recette&id=' + id;
-                    } else {
-                        swal("La recette n'a pas été supprimée!");
-                    }
-                });
-        }
-        
-
-    });
-});
-</script>-->
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#twitter"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#instagram"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#facebook"></use>
+                    </svg></a></li>
+        </ul>
+    </footer>
 </body>
 
 </html>

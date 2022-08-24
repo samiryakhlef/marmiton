@@ -135,8 +135,9 @@ Main content START -->
                                 <!-- Card img -->
                                 <div class="card-fold position-relative">
                                     <a href="?page=edit-recette&id=<?= $accueil->getId() ?>">
-                                        <img class="card-img" src="https://picsum.photos/200" alt="Card image">
+                                        <img class="card-img" src="<?=  $accueil->getImage(); ?>" alt="Card image">
                                     </a>
+                                
                                 </div>
                                 <div class="card-body px-0 pt-3">
                                     <!-- lien vers le détails de la recette -->
@@ -188,6 +189,28 @@ PAGINATION START -->
 PAGNATION END -->
     <!-- =======================
 Footer START -->
+<footer class="d-flex flex-wrap justify-content-between align-items-center bg-dark py-3 my-4 border-top">
+        <div class="col-md-4 d-flex align-items-center">
+            <a href="/" class="mb-3 me-2 mb-md-0 text-muted text-decoration-none lh-1">
+                <svg class="bi" width="30" height="24">
+                    <use xlink:href="#bootstrap"></use>
+                </svg>
+            </a>
+            <p class="text-white">Copyright &copy; 2022 - All rights reserved to Samir Yakhlef</p>
+        </div>
+
+        <ul class="nav col-md-4 justify-content-end list-unstyled d-flex">
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#twitter"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#instagram"></use>
+                    </svg></a></li>
+            <li class="ms-3"><a class="text-muted" href="#"><svg class="bi" width="24" height="24">
+                        <use xlink:href="#facebook"></use>
+                    </svg></a></li>
+        </ul>
+    </footer>
 
     <!-- =======================
 Footer END -->

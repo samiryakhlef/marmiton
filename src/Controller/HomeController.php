@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use PDO;
+use Verot\Upload\Upload;
 use App\Model\ModelAccueil;
 
 class HomeController extends AbstractController
@@ -48,6 +48,7 @@ class HomeController extends AbstractController
 
         $accueils = $ModelAccueil->findByPage($currentPage, $order, $research, $type);
         $pages = $ModelAccueil->countPage($research);
+        $accueil = $ModelAccueil->findAll();
 
         $this->render('Home.php', [
             'accueils' => $accueils,
@@ -56,6 +57,7 @@ class HomeController extends AbstractController
             'research' => $research,
             'order' => $order,
             'research' => $research,
+            'accueil' => $accueil,
         ]);
     }
 
