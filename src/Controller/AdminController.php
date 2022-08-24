@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Database\Recette;
 use App\Model\ModelAccueil;
 
 class AdminController extends AbstractController
@@ -91,8 +90,8 @@ class AdminController extends AbstractController
             $steps = strip_tags($_POST['steps']);
             $difficulty = strip_tags($_POST['difficulty']);
             $type = strip_tags($_POST['type']);
-            $imageName =($_POST['image_name'] ?? null);
-            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $imageName);
+            $image =($_POST['image'] ?? null);
+            $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $image);
             header('Location: index.php?page=admin');
             exit;
         }

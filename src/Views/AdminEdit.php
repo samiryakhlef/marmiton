@@ -117,7 +117,7 @@ $db->Connect();
                             <div class="card overflow-hidden">
                                 <!-- Card img -->
                                 <div class="position-relative">
-                                    <img class="card-img" src="assets/images/blog/16by9/01.jpg" alt="Card image">
+                                    <img class="card-img" src="<?php echo $accueil['image'] ?>" alt="<?php echo $accueil['name'] ?>">
                                 </div>
                                 <div class="card-body px-0 pt-3">
                                     <h2 class="text-uppercase "><a href="#" class="btn-link text-reset fw-bolder"><?php echo $accueil['name'] ?></a></h2>
