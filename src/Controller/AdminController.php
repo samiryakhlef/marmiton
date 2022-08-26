@@ -90,7 +90,7 @@ class AdminController extends AbstractController
             $steps = strip_tags($_POST['steps']);
             $difficulty = strip_tags($_POST['difficulty']);
             $type = strip_tags($_POST['type']);
-            $image =($_POST['image'] ?? null);
+            $image =($_POST['image'] ?? '');
             $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $image);
             header('Location: index.php?page=admin');
             exit;
