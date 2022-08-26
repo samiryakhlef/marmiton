@@ -101,7 +101,7 @@ $db->Connect();
         <?php foreach ($accueils as $accueil) : ?>
             <div class="card m-4 rounded" style="width: 20rem;">
                 <a href="?page=edit-recette&id=<?= $accueil->getId() ?>">
-                    <img src="<?= $accueil->getImage() ?>" class="card-img-top" alt="..." style="width: 100% ;height: 200px;">
+                    <img src="<?= 'upload/' . $accueil->getImage() ?>" class="card-img-top" alt="..." style="width: 100% ;height: 200px;">
                 </a>
                 <div class="card-body">
                     <h5 class="card-title text-center text-capitalize"><?= $accueil->getName() ?></h5>
