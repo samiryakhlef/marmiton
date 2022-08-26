@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Model\ModelAccueil;
+use Verot\Upload\Upload;
 
 class AdminController extends AbstractController
 {
@@ -90,7 +91,20 @@ class AdminController extends AbstractController
             $steps = strip_tags($_POST['steps']);
             $difficulty = strip_tags($_POST['difficulty']);
             $type = strip_tags($_POST['type']);
-            $image =($_POST['image'] ?? null);
+            $image =($_POST['image'] ?? '');
+
+            $file = new Upload($_FILES['image'], 'fr_FR');
+            if ($file->uploaded) {
+                $folder = realpath(dirname(__FILE__) . '/../../upload');
+                $file->process($folder);
+                if ($file->processed) {
+                    $file->clean();
+                } else {
+                    echo 'error : ' . $file->error;
+                }
+                
+            }
+
             $ModelAccueil->updateRecette($id, $name, $description, $ingredients, $steps, $difficulty, $type, $image);
             header('Location: index.php?page=admin');
             exit;

@@ -135,7 +135,7 @@ Main content START -->
                                 <!-- Card img -->
                                 <div class="card-fold position-relative">
                                     <a href="?page=edit-recette&id=<?= $accueil->getId() ?>">
-                                        <img class="card-img" src="<?=  $accueil->getImage(); ?>" alt="Card image">
+                                        <img class="card-img" src="<?=  'upload/' . $accueil->getImage() ?>" alt="Card image">
                                     </a>
                                 
                                 </div>

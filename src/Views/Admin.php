@@ -112,7 +112,7 @@ $db->Connect();
                                 <td class="table-danger"> <?= $accueil->getDifficulty() ?></td>
                                 <td class="table-secondary"> <?= $accueil->getType() ?></td>
                                 <td class="table-danger"> <?= $accueil->getCreated_at() ?></td>
-                                <td class="table-secondary"> <img src="<?= $accueil->getImage() ?>" alt="<?= $accueil->getName() ?>" width="100px" height="100px">Image</td>
+                                <td class="table-secondary"> <img src="<?='upload/' . $accueil->getImage() ?>" alt="<?= $accueil->getName() ?>" width="100px" height="100px"></td>
                                 <td><a class="btn btn-danger rounded" href="?page=delete_recette&id=<?= $accueil->getId() ?>">Supprimer</a></td>
                                 <td><a class="btn btn-warning rounded" href="?page=update_recette&id=<?= $accueil->getId() ?>">modifier</a></button></td>
                             </tr>

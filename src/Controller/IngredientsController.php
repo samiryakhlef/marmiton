@@ -24,14 +24,14 @@ class IngredientsController extends AbstractController
             $ingredients = htmlentities(trim($_POST['ingredients']));
             $difficulty = htmlentities(trim($_POST['difficulty']));
             $type = htmlentities(trim($_POST['type']));
-            $temps = htmlentities(trim($_POST['temps']));
+            $temps = htmlentities(trim($_POST['temps'])) ?? 0;
             $steps = htmlentities(trim($_POST['steps']));
 
 
             $file = new Upload($_FILES['image'], 'fr_FR');
             if ($file->uploaded) {
-                //dd($file);
-                $file->process('../upload/' . $file->file_dst_path);
+                $folder = realpath(dirname(__FILE__) . '/../../upload');
+                $file->process($folder);
                 if ($file->processed) {
                     $file->clean();
                 } else {
