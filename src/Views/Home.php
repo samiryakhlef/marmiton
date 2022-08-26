@@ -68,7 +68,7 @@ Header START -->
                         </li>
                     </ul>
                     <form class="d-flex">
-                        <button class="btn btn-outline-success" type="submit" id="select">recherche</button>
+                        <button class="btn btn-outline-success col-5 mx-3" type="submit" id="select">recherche</button>
                         <select class="form-select" id="floatingSelect" name="select" aria-label="Floating label select example">
                             <option value="1" <?php if ($order == 1) {
                                                     echo 'research';
